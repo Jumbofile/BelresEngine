@@ -11,5 +11,8 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/slick.jar"/>
 	<classpathentry kind="lib" path="lib/kryonet-2.21-all.jar"/>
+	<classpathentry kind="lib" path="lib/nifty-slick2d-renderer-1.4.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/nifty-slick2d-renderer-1.4.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/nifty-slick2d-renderer-1.4.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

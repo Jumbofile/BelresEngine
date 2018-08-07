@@ -1,6 +1,12 @@
 package client;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -8,11 +14,15 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.gui.AbstractComponent;
+import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class C_WindowMenu extends BasicGameState  {
+import de.lessvoid.nifty.slick2d.NiftyOrderControl;
+
+public class C_WindowMenu extends BasicGameState implements ActionListener  {
 	//References
 	C_Vars vars = new C_Vars();
 	
@@ -20,12 +30,13 @@ public class C_WindowMenu extends BasicGameState  {
 	public boolean connected;
 		
 	//Resources
-	private TextField username;
-	private TextField password;
 	private TrueTypeFont font;
 	private Image menuBack;
 	private Image menuLogo;
 	
+	//Elements
+	JTextField usernameBox, passwordBox;
+	JFrame frame;
 	// ID we return to class 'Application'
 		public static final int ID = 0;
 
@@ -35,20 +46,21 @@ public class C_WindowMenu extends BasicGameState  {
 			/*
 			 * MENU
 			 */
-			
+			frame = new JFrame();  
+			 
 			//fonts
 			Font awtFont = new Font("Times New Roman", Font.BOLD, 12);
 			font = new TrueTypeFont(awtFont, true);
 			
 			//Login fields
-			username = new TextField(gc, font, (vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150 , 25);
-		    username.setBackgroundColor(Color.white);
-		    username.setBorderColor(Color.darkGray);
-		    
-		    password = new TextField(gc, font, (vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150 , 25);
-		    password.setBackgroundColor(Color.white);
-		    password.setBorderColor(Color.darkGray);
-		    
+			usernameBox = new JTextField("Username"); 
+			usernameBox.setBounds((vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150, 25);  
+			
+			passwordBox = new JTextField("Username"); 
+			passwordBox.setBounds((vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150 , 25);  
+
+			usernameBox.addActionListener(this);
+			passwordBox.addActionListener(this);
 		    //back image
 		    menuBack = new Image("data/graphics/menu/back.png");
 		    menuLogo = new Image("data/graphics/menu/logo.png");
@@ -60,8 +72,9 @@ public class C_WindowMenu extends BasicGameState  {
 			//Render menu
 			menuBack.draw(0,0);
 			menuLogo.draw((vars.screenX / 2) - 330, 10);
-			username.render(gmc, gr);
-			password.render(gmc, gr);
+			
+			
+			
 			
 			
 			//Connection label
@@ -76,7 +89,12 @@ public class C_WindowMenu extends BasicGameState  {
 		// update-method with all the magic happening in it
 		@Override
 		public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
-			
+			SwingUtilities.invokeLater(new Runnable() {
+			    public void run() {
+			    	frame.add(usernameBox);
+					frame.add(passwordBox);
+			    }
+			  });
 		}
 
 		// Returning 'ID' from class 'MainMenu'
@@ -84,8 +102,15 @@ public class C_WindowMenu extends BasicGameState  {
 			return C_WindowMenu.ID;
 		}
 		
+		//Sets connection on GUI
 		public void setConnected(boolean connected) {
 			this.connected = connected;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
 		}
 
 }
