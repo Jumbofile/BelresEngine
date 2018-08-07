@@ -20,7 +20,6 @@ import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import de.lessvoid.nifty.slick2d.NiftyOrderControl;
 
 public class C_WindowMenu extends BasicGameState implements ActionListener  {
 	//References
