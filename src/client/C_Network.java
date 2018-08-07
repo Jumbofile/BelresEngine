@@ -18,16 +18,16 @@ public class C_Network {
 			//Are we connected
 			if(gameClient.isConnected()) {
 				connected = true;
-				C_Graphics game = new C_Graphics();
+				C_WindowMenu game = new C_WindowMenu();
 				game.setConnected(connected);
 			}else {
 				connected = false;
-				C_Graphics game = new C_Graphics();
+				C_WindowMenu game = new C_WindowMenu();
 				game.setConnected(connected);
 			}
 		} catch (Exception e) {
 			connected = false;
-			C_Graphics game = new C_Graphics();
+			C_WindowMenu game = new C_WindowMenu();
 			game.setConnected(connected);
 		}
 
