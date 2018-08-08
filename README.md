@@ -45,7 +45,7 @@ Add TWL.jar, and TWLEffects.jar from TWL to the lib folder
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Compile jars and distrubute
 
 ## Built With
 
