@@ -4,7 +4,7 @@
 
 -----------------
 
-2D Side Scroller MMO Engine written in Java. Uses Slick2D for graphics.
+2D Side Scroller MMO Engine written in Java.
 
 ## Getting Started
 
