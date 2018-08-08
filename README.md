@@ -13,8 +13,11 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 Eclipse IDE - https://www.eclipse.org/
+
 Slick2d     - http://slick.ninjacave.com/
+
 JDK         - https://www.oracle.com/technetwork/java/javase/downloads/index.html
+
 TWL         - http://twl.l33tlabs.org/
 
 ### Installing
