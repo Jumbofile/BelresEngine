@@ -4,34 +4,35 @@ import java.io.*;
 import java.net.*;
 
 public class C_Network {
-	private Socket gameClient;
 	public boolean connected = false;
-	private BufferedReader recieveTCP;
-	private DataOutputStream toServer;
+	private static Socket gameClient;
+	private static BufferedReader in;
+	private static PrintWriter out;
 	
-	public C_Network(int port, String ip) {
+	public C_Network() {
 		//Start the client		
-		try {
-			gameClient = new Socket(ip, port);
-			toServer = new DataOutputStream(gameClient.getOutputStream());
-			
-			//Are we connected
-			if(gameClient.isConnected()) {
-				connected = true;
-				C_WindowMenu game = new C_WindowMenu();
-				game.setConnected(connected);
-			}else {
+		 
+
+	}
+	
+	public void start_connection(int port, String ip) {
+		//start network
+		 try {
+				gameClient = new Socket(ip, port);
+				in = new BufferedReader(new InputStreamReader(gameClient.getInputStream()));
+				out = new PrintWriter(gameClient.getOutputStream(), true);
+				//Are we connected
+				if(gameClient.isConnected()) {
+					connected = true;
+					C_WindowMenu game = new C_WindowMenu();
+					game.setConnected(connected);
+				}	
+				
+			} catch (Exception e) {
 				connected = false;
 				C_WindowMenu game = new C_WindowMenu();
 				game.setConnected(connected);
 			}
-		} catch (Exception e) {
-			connected = false;
-			C_WindowMenu game = new C_WindowMenu();
-			game.setConnected(connected);
-		}
-
 	}
-	
 
 }

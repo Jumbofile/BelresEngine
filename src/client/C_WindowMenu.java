@@ -12,6 +12,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
+import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -75,6 +76,10 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	// render-method for all the things happening on-screen
 	@Override
 	public void render(GameContainer gmc, StateBasedGame sbg, Graphics gr) throws SlickException {
+		//mouse
+		Input input = gmc.getInput();
+		int xpos = input.getMouseX();
+		int ypos = input.getMouseY();
 		// Render menu
 		menuBack.draw(0, 0);
 		menuLogo.draw((vars.screenX / 2) - 330, 10);
@@ -86,6 +91,10 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 
 		//login button
 		menuButtonUp.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
+		if(xpos > (vars.screenX / 2) - (120 / 2) && xpos < (vars.screenX / 2) + (120 / 2) &&
+				ypos > (vars.screenY / 2) + 45 && ypos < (vars.screenY / 2) + 94) {
+			menuButtonHover.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
+		}
 		
 		// Connection label
 		if (connected) {
