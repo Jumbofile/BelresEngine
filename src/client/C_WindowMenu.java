@@ -3,12 +3,6 @@ package client;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -34,9 +28,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	private StringBuffer buf2 = new StringBuffer();
 
 	// Resources
-	private TrueTypeFont font;
-	private Image menuBack;
-	private Image menuLogo;
+	private TrueTypeFont roboto14, roboto18;
+	private Image menuBack, menuLogo, menuButtonUp, menuButtonDown, menuButtonHover, menuLogin;
 
 	// Elements
 	TextField usernameBox, passwordBox;
@@ -50,11 +43,11 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		 * MENU
 		 */
 		// fonts
-		Font awtFont = new Font("Roboto", Font.BOLD, 14);
-		font = new TrueTypeFont(awtFont, true);
 
+		roboto14 = new TrueTypeFont(new Font("Roboto", Font.BOLD, 18), true);
+		roboto18 = new TrueTypeFont(new Font("Roboto", Font.PLAIN, 18), false);
 		// Login fields
-		usernameBox = new TextField(gc, font, (vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150, 25,
+		usernameBox = new TextField(gc, roboto14, (vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150, 24,
 				new ComponentListener() {
 					public void componentActivated(AbstractComponent source) {
 						username = usernameBox.getText();
@@ -63,16 +56,20 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 				});
 
 		// PasswordField
-		passwordBox = new TextField(gc, font, (vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150, 25,
+		passwordBox = new TextField(gc, roboto14, (vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150, 24,
 				new ComponentListener() {
 					public void componentActivated(AbstractComponent source) {
 						usernameBox.setFocus(true);
 					}
 				});
 
-		// back image
-		menuBack = new Image("data/graphics/menu/back.png");
-		menuLogo = new Image("data/graphics/menu/logo.png");
+		// Load in Images 
+		menuBack 		= new Image("data/graphics/menu/back.png");
+		menuLogo 		= new Image("data/graphics/menu/logo.png");
+		menuLogin 		= new Image("data/graphics/menu/login.png");
+		menuButtonUp 	= new Image("data/graphics/menu/bup.png");
+		menuButtonDown 	= new Image("data/graphics/menu/bdown.png");
+		menuButtonHover = new Image("data/graphics/menu/bhover.png");
 	}
 
 	// render-method for all the things happening on-screen
@@ -82,15 +79,19 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		menuBack.draw(0, 0);
 		menuLogo.draw((vars.screenX / 2) - 330, 10);
 
-		font.drawString((vars.screenX / 2) - 34, (vars.screenY / 2) - 40, "Username", Color.white);
+		//login
+		menuLogin.draw((vars.screenX / 2) - 75, (vars.screenY / 2) - 35);
 		usernameBox.render(gmc, gr);
 		passwordBox.render(gmc, gr);
 
+		//login button
+		menuButtonUp.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
+		
 		// Connection label
 		if (connected) {
-			font.drawString(5, 50, "Online", Color.green);
+			roboto14.drawString(5, 50, "Online", Color.green);
 		} else {
-			font.drawString(5, 50, "Offline", Color.red);
+			roboto14.drawString(5, 50, "Offline", Color.red);
 		}
 	}
 

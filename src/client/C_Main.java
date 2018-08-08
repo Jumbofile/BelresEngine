@@ -20,7 +20,7 @@ public class C_Main {
 		
 		//Starts graphics
 		 try {
-	            AppGameContainer app = new AppGameContainer(new C_Graphics("My Game v" + vars.verison));
+	            AppGameContainer app = new AppGameContainer(new C_Graphics("Belres Engine v" + vars.verison));
 	            app.setDisplayMode(vars.screenX, vars.screenY, false);
 	            app.setTargetFrameRate(vars.maxFPS);
 	            app.setShowFPS(true);
