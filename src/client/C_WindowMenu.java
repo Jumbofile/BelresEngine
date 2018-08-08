@@ -27,15 +27,15 @@ public class C_WindowMenu extends BasicGameState implements ActionListener  {
 	
 	//Vars
 	public boolean connected;
-		
+	String username = new String();
+	String password;
 	//Resources
 	private TrueTypeFont font;
 	private Image menuBack;
 	private Image menuLogo;
 	
 	//Elements
-	JTextField usernameBox, passwordBox;
-	JFrame frame;
+	TextField usernameBox, passwordBox;
 	// ID we return to class 'Application'
 		public static final int ID = 0;
 
@@ -44,22 +44,36 @@ public class C_WindowMenu extends BasicGameState implements ActionListener  {
 		public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 			/*
 			 * MENU
-			 */
-			frame = new JFrame();  
-			 
+			 */ 
 			//fonts
-			Font awtFont = new Font("Times New Roman", Font.BOLD, 12);
+			Font awtFont = new Font("Roboto", Font.BOLD, 14);
 			font = new TrueTypeFont(awtFont, true);
 			
 			//Login fields
-			usernameBox = new JTextField("Username"); 
-			usernameBox.setBounds((vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150, 25);  
+			usernameBox = new TextField(gc, font, (vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150, 25, new ComponentListener() {
+				public void componentActivated(AbstractComponent source) {
+					username = usernameBox.getText();
+					passwordBox.setFocus(true);
+				}
+			});
+			StringBuffer buf = new StringBuffer();
+	        char ch = '*';
+	        if(username.length() > 0) {
+		        for (int i=0; i < username.length(); i++) {
+		            buf.append(ch);
+		        }
+	        }
+	        usernameBox.setText(buf.toString());
+	        
+			//PasswordField 
+			passwordBox = new TextField(gc, font, (vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150, 25,new ComponentListener() {
+				public void componentActivated(AbstractComponent source) {
+					password = passwordBox.getText();
+					usernameBox.setFocus(true);
+				}
+			});
 			
-			passwordBox = new JTextField("Username"); 
-			passwordBox.setBounds((vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150 , 25);  
-
-			usernameBox.addActionListener(this);
-			passwordBox.addActionListener(this);
+			
 		    //back image
 		    menuBack = new Image("data/graphics/menu/back.png");
 		    menuLogo = new Image("data/graphics/menu/logo.png");
@@ -72,7 +86,9 @@ public class C_WindowMenu extends BasicGameState implements ActionListener  {
 			menuBack.draw(0,0);
 			menuLogo.draw((vars.screenX / 2) - 330, 10);
 			
-			
+			font.drawString((vars.screenX / 2)  - 343, (vars.screenY / 2) - 40, "Username", Color.white);
+			usernameBox.render(gmc, gr);
+			passwordBox.render(gmc, gr);
 			
 			
 			
@@ -88,12 +104,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener  {
 		// update-method with all the magic happening in it
 		@Override
 		public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
-			SwingUtilities.invokeLater(new Runnable() {
-			    public void run() {
-			    	frame.add(usernameBox);
-					frame.add(passwordBox);
-			    }
-			  });
+
 		}
 
 		// Returning 'ID' from class 'MainMenu'

@@ -1,15 +1,8 @@
 package client;
 
-import java.awt.Font;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.gui.*;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class C_Graphics extends StateBasedGame{
@@ -35,4 +28,6 @@ public class C_Graphics extends StateBasedGame{
         this.addState(new C_WindowMenu());
         this.addState(new C_WindowGame());
     }
+
+
 }

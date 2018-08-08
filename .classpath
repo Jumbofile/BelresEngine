@@ -10,5 +10,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/slick.jar"/>
+	<classpathentry kind="lib" path="lib/TWL.jar"/>
+	<classpathentry kind="lib" path="lib/TWLEffects.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
