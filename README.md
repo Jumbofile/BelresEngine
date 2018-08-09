@@ -20,6 +20,8 @@ JDK         - https://www.oracle.com/technetwork/java/javase/downloads/index.htm
 
 TWL         - http://twl.l33tlabs.org/
 
+Kryonet     - https://github.com/EsotericSoftware/kryonet
+
 ### Installing
 
 Download and install JDK
@@ -43,6 +45,8 @@ Add jinput.jar, lwjgl_util.jar, lwgjl.jar, and slick.jar from slick2d to the lib
 
 Add TWL.jar, and TWLEffects.jar from TWL to the lib folder
 
+Add kryonet-2.21-all.jar from Kryonet to the lib folder
+
 ## Deployment
 
 Compile jars and distrubute
@@ -50,6 +54,8 @@ Compile jars and distrubute
 ## Built With
 
 * [Slick2d](http://slick.ninjacave.com/) - The graphics framework used
+
+* [Kryonet](https://github.com/EsotericSoftware/kryonet) - The networking framework used
 
 ## Versioning
 
