@@ -22,7 +22,7 @@ TWL         - http://twl.l33tlabs.org/
 
 Kryonet     - https://github.com/EsotericSoftware/kryonet
 
-DerbyDB     - https://db.apache.org/derby/
+Apche Derby - https://db.apache.org/derby/
 
 ### Installing
 
@@ -66,6 +66,8 @@ Compile jars and distrubute
 * [Slick2d](http://slick.ninjacave.com/) - The graphics framework used
 
 * [Kryonet](https://github.com/EsotericSoftware/kryonet) - The networking framework used
+
+* [Apache Derby](https://db.apache.org/derby/) - SQL databse used
 
 ## Versioning
 
