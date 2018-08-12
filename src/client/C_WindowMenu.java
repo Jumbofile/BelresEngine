@@ -8,6 +8,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.MouseListener;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.gui.AbstractComponent;
@@ -27,6 +28,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	private String password = new String();
 	private String temp = new String();
 	private StringBuffer buf2 = new StringBuffer();
+	private boolean loginPressed = false;
+	private double LastMoveTime;
 
 	// Resources
 	private TrueTypeFont roboto14, roboto18;
@@ -80,6 +83,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		Input input = gmc.getInput();
 		int xpos = input.getMouseX();
 		int ypos = input.getMouseY();
+		//MouseListener click = new MouseListener();
 		// Render menu
 		menuBack.draw(0, 0);
 		menuLogo.draw((vars.screenX / 2) - 330, 10);
@@ -91,9 +95,13 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 
 		//login button
 		menuButtonUp.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
-		if(xpos > (vars.screenX / 2) - (120 / 2) && xpos < (vars.screenX / 2) + (120 / 2) &&
-				ypos > (vars.screenY / 2) + 45 && ypos < (vars.screenY / 2) + 94) {
-			menuButtonHover.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
+		if(!loginPressed) {
+			if(xpos > (vars.screenX / 2) - (120 / 2) && xpos < (vars.screenX / 2) + (120 / 2) &&
+					ypos > (vars.screenY / 2) + 45 && ypos < (vars.screenY / 2) + 94) {
+				menuButtonHover.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
+			}
+		}else if(loginPressed) {
+			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
 		}
 		
 		// Connection label
@@ -104,10 +112,30 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		}
 	}
 
+	@Override
+	public void mousePressed(int button, int x, int y)
+	{
+	    if( button == 0 )
+	    {
+	    	if(x > (vars.screenX / 2) - (120 / 2) && x < (vars.screenX / 2) + (120 / 2) &&
+					y > (vars.screenY / 2) + 45 && y < (vars.screenY / 2) + 94) {
+	    		loginPressed = true;
+    			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
+    			System.out.println("CLONK");
+    			LastMoveTime = System.currentTimeMillis();
+	    	}
+	    }else {
+	    	loginPressed = false;
+	    }
+	}
+	
 	// update-method with all the magic happening in it
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
-
+		//mouse
+		Input input = gc.getInput();
+		int xpos = input.getMouseX();
+		int ypos = input.getMouseY();
 		/*
 		 * This stars out the password in the textfield
 		 */
@@ -149,6 +177,12 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		passwordBox.setText(maskValue.toString());
 		
 		// DEBUG System.out.println(temp);
+		if(loginPressed) {
+			if(System.currentTimeMillis() - LastMoveTime >= 150){ 
+				loginPressed = false;
+			}
+			
+		}
 	}
 
 	// Returning 'ID' from class 'MainMenu'
