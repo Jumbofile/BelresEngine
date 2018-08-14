@@ -45,7 +45,7 @@ public class C_Network {
 		
 		try {
 			String line = in.readLine();
-			System.out.println(line);
+			//System.out.println(line);
 			if(line.equals("true")) {
 				out.close();
 				return true;

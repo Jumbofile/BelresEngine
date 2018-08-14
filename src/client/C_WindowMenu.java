@@ -76,7 +76,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 						usernameBox.setFocus(true);
 					}
 				});
-
+		
 		// Load in Images 
 		menuBack 		= new Image("data/graphics/menu/back.png");
 		menuLogo 		= new Image("data/graphics/menu/logo.png");
@@ -132,14 +132,16 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 					y > (vars.screenY / 2) + 45 && y < (vars.screenY / 2) + 94) {
 	    		loginPressed = true;
     			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
-    			System.out.println("CLONK");
+    			//System.out.println("CLONK");
     			String pw_hash = BCrypt.hashpw(temp, BCrypt.gensalt()); 
     			network.sendLogin(usernameBox.getText(), pw_hash);
     			LastMoveTime = System.currentTimeMillis();
+    			
+    			//was the login attempt valid?
     			if(network.loginValid()) {
-    				System.out.println("good");
+    				loginValid = true;
     			}else {
-    				System.out.println("bad");
+    				loginValid = false;
     			}
 	    	}
 	    }else {
@@ -196,6 +198,10 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		
 		// DEBUG System.out.println(temp);
 		if(loginPressed) {
+			if(loginValid) {
+				sbg.enterState(1);
+			}
+			//need to show something to let user know login was invalid
 			if(System.currentTimeMillis() - LastMoveTime >= 150){ 
 				loginPressed = false;
 			}
@@ -218,5 +224,6 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }
