@@ -37,6 +37,27 @@ public class C_Network {
 		//System.out.print(username + ", " + password);
 		String packet = new String("login<" + username + "," + password);
 		out.println(packet);
+		//out.close();
 	}
 
+	public boolean loginValid() {
+		//if(in.)
+		
+		try {
+			String line = in.readLine();
+			System.out.println(line);
+			if(line.equals("true")) {
+				out.close();
+				return true;
+			}else {
+				return false;
+			}
+		} catch (IOException e) {
+			System.out.println("HI");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+			
+		}
+	}
 }

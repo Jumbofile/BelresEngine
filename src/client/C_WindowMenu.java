@@ -3,6 +3,8 @@ package client;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -30,6 +32,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	private StringBuffer buf2 = new StringBuffer();
 	private boolean loginPressed = false;
 	private double LastMoveTime;
+	private boolean loginValid = false;
 	
 	//Classes
 	C_Network network;
@@ -130,8 +133,14 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	    		loginPressed = true;
     			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
     			System.out.println("CLONK");
-    			network.sendLogin(usernameBox.getText(), temp);
+    			String pw_hash = BCrypt.hashpw(temp, BCrypt.gensalt()); 
+    			network.sendLogin(usernameBox.getText(), pw_hash);
     			LastMoveTime = System.currentTimeMillis();
+    			if(network.loginValid()) {
+    				System.out.println("good");
+    			}else {
+    				System.out.println("bad");
+    			}
 	    	}
 	    }else {
 	    	loginPressed = false;
