@@ -34,8 +34,9 @@ public class C_Network {
 	//send login to the server
 	public void sendLogin(String username, String password) {
 		//send login information
-		System.out.print(username + ", " + password);
-		
+		//System.out.print(username + ", " + password);
+		String packet = new String("login<" + username + "," + password);
+		out.println(packet);
 	}
 
 }

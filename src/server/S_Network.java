@@ -22,12 +22,22 @@ public class S_Network {
 		} catch (IOException e) {
 			return;
 		}
+		System.out.println("Client " + socket.getInetAddress() + " connected." );
 		String line;
 		while (true) {
 			try {
+				int packetID = 0;
 				//Recieve line from client
 				line = brinp.readLine();
+				try {
+					packetID = line.indexOf("<");
+				}catch(Exception e) {
+					System.out.println("Invalid packet.");
+				}
 				
+				if(line.substring(0, packetID).equals("login")) {
+					recieveLogin(line, packetID);
+				}
 				//LOGOUT WILL GO HERE
 				if ((line == null) || line.equalsIgnoreCase("QUIT")) {
 					socket.close();
@@ -37,9 +47,24 @@ public class S_Network {
 					out.flush();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				try {
+					System.out.println("Client " + socket.getInetAddress() + " disconnected.");
+					socket.close();
+				}catch (Exception x) {
+					e.printStackTrace();
+				}
+				
 				return;
 			}
 		}
+	}
+
+	private void recieveLogin(String message, int id) {
+		int lineBreak = message.indexOf(",");
+		String username = message.substring(id + 1, lineBreak);
+		String password = message.substring(lineBreak + 1);
+		
+		System.out.print(username + ", " + password);
+		
 	}
 }

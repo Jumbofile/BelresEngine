@@ -111,8 +111,9 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
 		}
 		
+		
 		// Connection label
-		if (connected) {
+		if (network.getConnected()) {
 			roboto14.drawString(5, 50, "Online", Color.green);
 		} else {
 			roboto14.drawString(5, 50, "Offline", Color.red);

@@ -15,6 +15,7 @@ public class S_Main {
 
         try {
             serverSocket = new ServerSocket(vars.PORT);
+            System.out.println("Server started on port " + vars.PORT + ".");
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -30,9 +31,6 @@ public class S_Main {
         }
     }
 	
-	private boolean recieveLogin(String message) {
-		
-		return false;
-	}
+	
 }
 
