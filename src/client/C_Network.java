@@ -9,14 +9,8 @@ public class C_Network {
 	private static BufferedReader in;
 	private static PrintWriter out;
 	
-	public C_Network() {
+	public C_Network(int port, String ip) {
 		//Start the client		
-		 
-
-	}
-	
-	public void start_connection(int port, String ip) {
-		//start network
 		 try {
 				gameClient = new Socket(ip, port);
 				in = new BufferedReader(new InputStreamReader(gameClient.getInputStream()));
@@ -24,15 +18,24 @@ public class C_Network {
 				//Are we connected
 				if(gameClient.isConnected()) {
 					connected = true;
-					C_WindowMenu game = new C_WindowMenu();
-					game.setConnected(connected);
 				}	
 				
 			} catch (Exception e) {
 				connected = false;
-				C_WindowMenu game = new C_WindowMenu();
-				game.setConnected(connected);
 			}
+
+	}
+	
+	//Check if client is online
+	public boolean getConnected() {
+		return connected;
+	}
+	
+	//send login to the server
+	public void sendLogin(String username, String password) {
+		//send login information
+		System.out.print(username + ", " + password);
+		
 	}
 
 }

@@ -3,35 +3,43 @@ package server;
 import java.io.*;
 import java.net.*;
 
+
 public class S_Network {
-	private ServerSocket gameServer;
-	public boolean connected = false;
-	private boolean start = false;
+	protected Socket socket;
 	
-	public S_Network(int port) {
+	public S_Network(Socket clientSocket) {
+		this.socket = clientSocket;
+	}
+
+	public void run() {
+		InputStream inp = null;
+		BufferedReader brinp = null;
+		DataOutputStream out = null;
 		try {
-			gameServer = new ServerSocket(port);
-			
-			System.out.println("Server started on port " + port);
-			
-			start = true;
-			while(start) {
-				//Server main loop
-				Socket activeSocket = gameServer.accept();
+			inp = socket.getInputStream();
+			brinp = new BufferedReader(new InputStreamReader(inp));
+			out = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			return;
+		}
+		String line;
+		while (true) {
+			try {
+				//Recieve line from client
+				line = brinp.readLine();
 				
-				if(activeSocket.isConnected()) {
-					connected = true;
-					System.out.println("New connection: " + activeSocket.getInetAddress() );
-				}else {
-					connected = false;
+				//LOGOUT WILL GO HERE
+				if ((line == null) || line.equalsIgnoreCase("QUIT")) {
+					socket.close();
+					return;
+				} else {
+					out.writeBytes(line + "\n\r");
+					out.flush();
 				}
-				
-				if(connected = true && activeSocket.isConnected()) {
-					System.out.println(activeSocket.getInetAddress() + " disconnected" );
-				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
 			}
-		}catch(Exception e){
-			e.printStackTrace();
 		}
 	}
 }

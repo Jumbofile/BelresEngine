@@ -30,7 +30,9 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	private StringBuffer buf2 = new StringBuffer();
 	private boolean loginPressed = false;
 	private double LastMoveTime;
-
+	
+	//Classes
+	C_Network network;
 	// Resources
 	private TrueTypeFont roboto14, roboto18;
 	private Image menuBack, menuLogo, menuButtonUp, menuButtonDown, menuButtonHover, menuLogin;
@@ -39,7 +41,12 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	TextField usernameBox, passwordBox;
 	// ID we return to class 'Application'
 	public static final int ID = 0;
-
+	
+	//defines the network used
+	public C_WindowMenu(C_Network net) {
+		this.network = net;
+	}
+	
 	// init-method for initializing all resources
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -122,6 +129,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	    		loginPressed = true;
     			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
     			System.out.println("CLONK");
+    			network.sendLogin(usernameBox.getText(), temp);
     			LastMoveTime = System.currentTimeMillis();
 	    	}
 	    }else {

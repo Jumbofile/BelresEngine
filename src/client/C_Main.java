@@ -19,6 +19,7 @@ import org.newdawn.slick.SlickException;
 public class C_Main {
 	public static C_Vars vars;
 	public static C_Network network;
+	public static C_Graphics graph;
 	public boolean playing = true;
 	/*
 	 * THIS IS WHERE ARE THE MAGIC HAPPENS
@@ -26,16 +27,17 @@ public class C_Main {
 	public static void main(String[] args) {
 		//init the isntances
 		vars = new C_Vars(); //NEED FOR VARIABLES
-		network = new C_Network();
+		
 		//starts connection
-		network.start_connection(vars.PORT, vars.IP);
+		network = new C_Network(vars.PORT, vars.IP);
 		
 		//Starts graphics
 		 try {
-            AppGameContainer app = new AppGameContainer(new C_Graphics("Belres Engine v" + vars.verison));
+            AppGameContainer app = new AppGameContainer(graph = new C_Graphics("Belres Engine v" + vars.verison));
             app.setDisplayMode(vars.screenX, vars.screenY, false);
             app.setTargetFrameRate(vars.maxFPS);
             app.setShowFPS(true);
+            graph.setNet(network);
             app.start();
         } catch(SlickException e) {
             e.printStackTrace();
