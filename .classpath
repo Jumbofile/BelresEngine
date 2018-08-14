@@ -18,5 +18,10 @@
 	<classpathentry kind="lib" path="lib/derbynet.jar"/>
 	<classpathentry kind="lib" path="lib/derbyrun.jar"/>
 	<classpathentry kind="lib" path="lib/derbytools.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6-test-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6-tests.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
