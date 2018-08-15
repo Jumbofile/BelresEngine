@@ -69,7 +69,7 @@ public class S_Network {
 				}
 			} catch (IOException e) {
 				try {
-					System.out.println("Client " + socket.getInetAddress() + " disconnected.");
+					console.append("Client " + socket.getInetAddress() + " disconnected.\n");
 					socket.close();
 				}catch (Exception x) {
 					e.printStackTrace();
