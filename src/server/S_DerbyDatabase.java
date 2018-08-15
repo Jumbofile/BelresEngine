@@ -5,11 +5,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//import gameSqldemo.SQLDemo.RowList;
 import server.S_DBUtil;
 
 public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersist package taken from Lab06 ----CITING
@@ -20,6 +21,24 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 			throw new IllegalStateException("Could not load Derby driver");
 		}
 	}
+	
+	//decleration
+	S_Main main = new S_Main();
+	
+	static class RowList extends ArrayList<List<String>> {
+		private static final long serialVersionUID = 1L;
+	}
+	
+	private static final String PAD =
+			"                                                    " +
+			"                                                    " +
+			"                                                    " +
+			"                                                    ";
+		private static final String SEP =
+			"----------------------------------------------------" +
+			"----------------------------------------------------" +
+			"----------------------------------------------------" +
+			"----------------------------------------------------";
 	
 	private interface Transaction<ResultType> {
 		public ResultType execute(Connection conn) throws SQLException;
@@ -136,12 +155,115 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 		
 	}
 	
+	//return a db
+	public void printDB(String dbName) {
+		ArrayList<String> returnStmt = new ArrayList<String>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		int rowCount = 0;
+		
+		try {
+			
+			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		
+			// retreive username attribute from login
+			stmt = conn.prepareStatement(
+					"select * from account"
+			);		
+			
+			//stmt.setString(1, dbName);
+			// execute the query
+			
+			resultSet = stmt.executeQuery();
+			
+			//harry = resultSet.getString("username");/// this might not work 
+			//int i = 1;
+			ResultSetMetaData schema = resultSet.getMetaData();
+
+			List<String> colNames = new ArrayList<String>();
+			for (int i = 1; i <= schema.getColumnCount(); i++) {
+				colNames.add(schema.getColumnName(i));
+			}
+
+			RowList rowList = getRows(resultSet, schema.getColumnCount());
+			rowCount = rowList.size();
+
+			List<Integer> colWidths = getColumnWidths(colNames, rowList);
+
+			printRow(colNames, colWidths);
+			printSeparator(colWidths);
+			for (List<String> row : rowList) {
+				printRow(row, colWidths);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		finally {
+			S_DBUtil.closeQuietly(resultSet);
+			S_DBUtil.closeQuietly(stmt);
+			S_DBUtil.closeQuietly(conn);
+		}
+		//return returnStmt;
+		
+	}
+	
+	//used for printing sql statments
+	private static void printRow(List<String> row, List<Integer> colWidths) {
+		for (int i = 0; i < row.size(); i++) {
+			if (i > 0) {
+				S_Main.consoleWin.append(" ");
+			}
+			String item = row.get(i);
+			S_Main.consoleWin.append(PAD.substring(0, colWidths.get(i) - item.length()));
+			S_Main.consoleWin.append(item);
+		}
+		S_Main.consoleWin.append("\n");
+	}
+
+	private static void printSeparator(List<Integer> colWidths) {
+		List<String> sepRow = new ArrayList<String>();
+		for (Integer w : colWidths) {
+			sepRow.add(SEP.substring(0, w));
+		}
+		printRow(sepRow, colWidths);
+	}
+
+	private static RowList getRows(ResultSet resultSet, int numColumns) throws SQLException {
+		RowList rowList = new RowList();
+		while (resultSet.next()) {
+			List<String> row = new ArrayList<String>();
+			for (int i = 1; i <= numColumns; i++) {
+				row.add(resultSet.getObject(i).toString());
+			}
+			rowList.add(row);
+		}
+		return rowList;
+	}
+
+	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
 		} catch (SQLException e) {
 			throw new S_PersistenceException("Transaction failed", e);
 		}
+	}
+	
+	private static List<Integer> getColumnWidths(List<String> colNames, RowList rowList) {
+		List<Integer> colWidths = new ArrayList<Integer>();
+		for (String colName : colNames) {
+			colWidths.add(colName.length());
+		}
+		for (List<String> row: rowList) {
+			for (int i = 0; i < row.size(); i++) {
+				colWidths.set(i, Math.max(colWidths.get(i), row.get(i).length()));
+			}
+		}
+		return colWidths;
 	}
 	
 	public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
