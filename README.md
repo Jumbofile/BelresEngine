@@ -6,6 +6,10 @@
 
 2D Side Scroller MMO Engine written in Java.
 
+## Screenshots
+
+<img src="https://i.imgur.com/Uhh6aBx.jpg">
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -20,8 +24,6 @@ JDK         - https://www.oracle.com/technetwork/java/javase/downloads/index.htm
 
 TWL         - http://twl.l33tlabs.org/
 
-Kryonet     - https://github.com/EsotericSoftware/kryonet
-
 Apche Derby - https://db.apache.org/derby/
 
 ### Installing
@@ -33,8 +35,6 @@ Download and install Eclipse
 Download and extract Slick2d
 
 Download and extract TWL
-
-Download and extract Kryonet
 
 Download and extract Derby
 
@@ -51,8 +51,6 @@ Add jinput.jar, lwjgl_util.jar, lwgjl.jar, and slick.jar from slick2d to the lib
 
 Add TWL.jar, and TWLEffects.jar from TWL to the lib folder
 
-Add kryonet-2.21-all.jar from Kryonet to the lib folder
-
 Add derby.jar, derbyclient.jar, derbynet.jar, derbyrun.jar, derbytools.jar to the the lib folder
 
 *If errors arise, rick click the project in the package explore and click properties. Go to Java build path and then click on the libraries tab. If there is a jar file missing, click add JAR and navigate to the lib folder and ctrl-click all of them, then click add.
@@ -64,8 +62,6 @@ Compile jars and distrubute
 ## Built With
 
 * [Slick2d](http://slick.ninjacave.com/) - The graphics framework used
-
-* [Kryonet](https://github.com/EsotericSoftware/kryonet) - The networking framework used
 
 * [Apache Derby](https://db.apache.org/derby/) - SQL databse used
 
