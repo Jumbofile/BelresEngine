@@ -130,19 +130,24 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	    {
 	    	if(x > (vars.screenX / 2) - (120 / 2) && x < (vars.screenX / 2) + (120 / 2) &&
 					y > (vars.screenY / 2) + 45 && y < (vars.screenY / 2) + 94) {
-	    		loginPressed = true;
-    			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
-    			//System.out.println("CLONK");
-    			String pw_hash = BCrypt.hashpw(temp, BCrypt.gensalt()); 
-    			network.sendLogin(usernameBox.getText(), pw_hash);
-    			LastMoveTime = System.currentTimeMillis();
-    			
-    			//was the login attempt valid?
-    			if(network.loginValid()) {
-    				loginValid = true;
-    			}else {
-    				loginValid = false;
-    			}
+	    		if(usernameBox.getText().equals("") || usernameBox.getText().equals(null) ||
+	    				passwordBox.getText().equals("") || passwordBox.getText().equals(null)) {
+	    			//invalid entry
+	    		}else {
+		    		loginPressed = true;
+	    			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
+	    			//System.out.println("CLONK");
+	    			String pw_hash = BCrypt.hashpw(temp, BCrypt.gensalt()); 
+	    			network.sendLogin(usernameBox.getText(), pw_hash);
+	    			LastMoveTime = System.currentTimeMillis();
+	    			
+	    			//was the login attempt valid?
+	    			if(network.loginValid()) {
+	    				loginValid = true;
+	    			}else {
+	    				loginValid = false;
+	    			}
+	    		}
 	    	}
 	    }else {
 	    	loginPressed = false;

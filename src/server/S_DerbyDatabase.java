@@ -26,82 +26,116 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 	}
 
 	private static final int MAX_ATTEMPTS = 10;
-
+	
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////////////ADD AREA////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////	
-public int createArea(String name, String para, ArrayList<String> options) throws SQLException {
-		
-		int area_id = 0;
+///////////////////// REGISTER ACCOUNT////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+	public boolean registerAccount(String userName, String pass, String email) throws SQLException {
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		PreparedStatement stmt2 = null;
-		PreparedStatement stmt3 = null;
-		PreparedStatement stmt4 = null;
-		PreparedStatement stmt5 = null;
-		PreparedStatement stmt6 = null;
 		ResultSet resultSet = null;
-		ResultSet resultSet2 = null;
-		ResultSet resultSet3 = null;
-		ResultSet resultSet4 = null;
-		ResultSet resultSet5 = null;
 		
-		//Connects to database
+
 		conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
-				
-		//Takes information from the editor jsp and inserts it to the database for area
-				try {
-						stmt2 = conn.prepareStatement( // enter username
-								"insert into area(areaName, para, Opt1, Opt2, Opt3, Opt4, Opt5, Opt6, areaLink1, areaLink2, areaLink3, areaLink4, areaLink5, areaLink6, areaPicture)"
-								+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-						);				
-								
-						stmt2.setString(1, name);
-						stmt2.setString(2, para);
-						for(int i = 0; i < 13; i++){
-							stmt2.setString(i + 3, options.get(i));
-						}
-						
-								
-						stmt2.execute();
-						
-						stmt3 = conn.prepareStatement(
-								"select area.area_id from area where areaName = (?) and para = (?)"
-								
-						);
-					
-						stmt3.setString(1, name);
-						stmt3.setString(2, para);
-						
-						
-						resultSet = stmt3.executeQuery();
-						if(resultSet.next()) {
-							area_id = resultSet.getInt(1);
-						}
-						
-						
-					
-					
-				
-					
-					
-				} finally {
-					S_DBUtil.closeQuietly(resultSet);
-					S_DBUtil.closeQuietly(resultSet2);
-					S_DBUtil.closeQuietly(resultSet3);
-					S_DBUtil.closeQuietly(resultSet4);
-					S_DBUtil.closeQuietly(resultSet5);
-					S_DBUtil.closeQuietly(stmt);
-					S_DBUtil.closeQuietly(stmt2);
-					S_DBUtil.closeQuietly(stmt3);
-					S_DBUtil.closeQuietly(stmt4);
-					S_DBUtil.closeQuietly(stmt5);
-					S_DBUtil.closeQuietly(stmt6);
-					S_DBUtil.closeQuietly(conn);
+
+		try {
+			// retreive username attribute from login
+			stmt = conn.prepareStatement("select userName " // user attribute
+					+ "  from account " // from login table
+					+ "  where userName = ?"
+
+			);
+
+			// substitute the title entered by the user for the placeholder in
+			// the query
+			stmt.setString(1, userName);
+
+			// execute the query
+			resultSet = stmt.executeQuery();
+
+			if (!resultSet.next()) { /// if username doesnt exist
+
+				stmt2 = conn.prepareStatement( // enter username
+						"insert into account(userName, password, email, type)" + "values(?, ?, ?, ?)");
+
+				stmt2.setString(1, userName);
+				stmt2.setString(2, pass);
+				stmt2.setString(3, email);
+				stmt2.setString(4, "1");
+
+				stmt2.execute();
+
+				return true;
+			} else {
+				return false; // username already exists
+			}
+
+		} finally {
+			S_DBUtil.closeQuietly(resultSet);
+			S_DBUtil.closeQuietly(stmt);
+			S_DBUtil.closeQuietly(stmt2);	
+			S_DBUtil.closeQuietly(conn);
+		}
+	}
+
+	public boolean accountExist(String username, String password){ ///checks if account exists
+		//Checks if the user exist and if the password matches
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		String user = null;
+		String pass = null;
+		boolean exist = false;
+		int count = 0;
+		
+		try {
+			
+			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		
+			// retreive username attribute from login
+			stmt = conn.prepareStatement(
+					"select * from account"
+			);		
+
+			// execute the query
+			resultSet = stmt.executeQuery();
+			
+			//harry = resultSet.getString("username");/// this might not work 
+			while(resultSet.next()) {
+				user = resultSet.getString("userName");
+				pass = resultSet.getString("password");
+				if(username.equals(user) && password.equals(pass)) {
+					exist = true;
 				}
-			return area_id;
-	}	
-///////////////////////////////////////////////////////////////////////////////////	
+				
+			}
+			
+			//System.out.println(exist);
+			if(exist == true) { 
+				return true;//account exists				
+			}
+			else{
+				return false;//account doesnt exists		
+			}
+		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		finally {
+			S_DBUtil.closeQuietly(resultSet);
+			S_DBUtil.closeQuietly(stmt);
+			S_DBUtil.closeQuietly(conn);
+		}
+		return false;
+		
+	}
+	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
@@ -248,113 +282,23 @@ public int createArea(String name, String para, ArrayList<String> options) throw
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
-				PreparedStatement stmt2 = null;
-				PreparedStatement stmt3 = null;
-				PreparedStatement stmt4 = null;
-				PreparedStatement stmt5 = null;
-				PreparedStatement stmt6 = null;
-				PreparedStatement stmt7 = null;
-				
-				
+								
 				try {
-					stmt1 = conn.prepareStatement( //creates login table
-						"create table login (" +
+					stmt1 = conn.prepareStatement( //creates account table
+						"create table account (" +
 						"	login_id integer primary key " +
 						"		generated always as identity (start with 1, increment by 1), " +									
 						"	userName varchar(40)," +
 						"	password varchar(100),"+
 						"   email varchar(40),"    +
-						"   type varchar(40),"     +
-						"   area varchar(40)"      +
+						"   type varchar(40)"      +
 						")"
 					);	
 					stmt1.executeUpdate();
-					
-					stmt2 = conn.prepareStatement( // creates user inventory table
-							"create table userInventory (" +
-							"	userInventory_id integer primary key " +
-							"		generated always as identity (start with 1, increment by 1), " +									
-							"	itemName varchar(40)," +
-							"	itemType varchar(40)," +
-							"   size integer"     +
-							")"
-						);	
-						stmt2.executeUpdate();
 						
-					stmt3 = conn.prepareStatement( //creates house inventory 
-							"create table houseItems (" +
-							"	houseInventory_id integer primary key " +
-							"		generated always as identity (start with 1, increment by 1), " +									
-							"	itemName varchar(40)," +
-							"	itemType varchar(40)," +
-							"   size integer"     +
-							")"
-						);	
-						stmt3.executeUpdate();	
-						
-					stmt4 = conn.prepareStatement( //creates house inventory 
-							"create table area (" +
-							"	area_id integer primary key " +
-							"		generated always as identity (start with 1, increment by 1), " +									
-							"	areaName varchar(40)," +
-							"	para varchar(1000)," +
-							"   Opt1 varchar(40)," +
-							"   Opt2 varchar(40)," +
-							"   Opt3 varchar(40)," +
-							"   Opt4 varchar(40)," +
-							"   Opt5 varchar(40)," +
-							"   Opt6 varchar(40)," +
-							"	areaLink1 varchar(40)," +
-							"   areaLink2 varchar(40)," +
-							"   areaLink3 varchar(40)," +
-							"   areaLink4 varchar(40)," +
-							"   areaLink5 varchar(40)," +
-							"   areaLink6 varchar(40)," +
-							"   areaPicture varchar(40)" +
-							")"
-						);	
-					stmt4.executeUpdate();
-					
-					stmt5 = conn.prepareStatement( //creates house inventory 
-							"create table linearArea (" +
-							"	area_id integer primary key " +
-							"		generated always as identity (start with 1, increment by 1), " +									
-							"	areaName varchar(40),"
-							+ " para varchar(1000)" +
-							
-							")"
-						);	
-					stmt5.executeUpdate();
-					
-					stmt6 = conn.prepareStatement( //creates playerLocation table
-							"create table playerLocation (" +
-							"	location_id integer primary key " +
-							"		generated always as identity (start with 1, increment by 1), " +									
-							"	area varchar(40)" +
-							")"
-						);	
-					stmt6.executeUpdate();
-					
-					stmt7 = conn.prepareStatement( //creates house inventory 
-							"create table health (" +
-							"	health_id integer primary key " +
-							"		generated always as identity (start with 1, increment by 1), " +									
-							"	health varchar(40)" +
-							")"
-						);	
-					stmt7.executeUpdate();
-					
-					
-					
 					return true;
 				} finally {
 					S_DBUtil.closeQuietly(stmt1);
-					S_DBUtil.closeQuietly(stmt2);
-					S_DBUtil.closeQuietly(stmt3);
-					S_DBUtil.closeQuietly(stmt4);
-					S_DBUtil.closeQuietly(stmt5);
-					S_DBUtil.closeQuietly(stmt6);
-					S_DBUtil.closeQuietly(stmt7);
 				}
 			}
 		});

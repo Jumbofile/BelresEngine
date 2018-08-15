@@ -3,16 +3,22 @@ package server;
 import java.io.*;
 import java.net.*;
 
+import javax.swing.JTextArea;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 
 public class S_Network {
 	protected Socket socket;
 	private static PrintWriter out;
-	BufferedReader brinp = null;
+	private BufferedReader brinp = null;
+	private JTextArea console;
+	private S_DerbyDatabase db;
 	
-	public S_Network(Socket clientSocket) {
+	public S_Network(Socket clientSocket, JTextArea console) {
 		this.socket = clientSocket;
+		this.console = console;
+		db = new S_DerbyDatabase();
 	}
 
 	public void run() {
@@ -27,7 +33,8 @@ public class S_Network {
 		} catch (IOException e) {
 			return;
 		}
-		System.out.println("Client " + socket.getInetAddress() + " connected." );
+		console.append("Client " + socket.getInetAddress() + " connected.\n" );
+		//System.out.println("Client " + socket.getInetAddress() + " connected." );
 		String line;
 		while (true) {
 			try {
@@ -80,7 +87,7 @@ public class S_Network {
 		String password = message.substring(lineBreak + 1);
 		try {
 			//validate account TEMP
-			if(username.toLowerCase().equals("greg")) {
+			/*if(username.toLowerCase().equals("greg")) { 
 				if(BCrypt.checkpw("pass", password)){
 					sendLoginStatus(true);
 				}else {
@@ -88,7 +95,8 @@ public class S_Network {
 				}
 			}else {
 				sendLoginStatus(false);
-			}
+			}*/
+			sendLoginStatus(db.accountExist(username, password));
 		}catch(Exception e) {
 			
 		}
