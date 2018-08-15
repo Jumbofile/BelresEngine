@@ -51,6 +51,10 @@ public class S_Main {
             {
                 consoleWin.append(consoleBox.getText() + "\n");
                 
+                /*
+                 * CONSOLE COMMANDS
+                 */
+                
                 //register a new user with format /addnewuser username,password,email
                 if(consoleBox.getText().toLowerCase().startsWith("/addnewuser")) {
                 	try {
@@ -60,16 +64,16 @@ public class S_Main {
 	                			consoleBox.getText().indexOf(",") + 1, consoleBox.getText().indexOf(',', 
 	                					consoleBox.getText().indexOf(',') + 1));
 	                	String email = consoleBox.getText().substring(consoleBox.getText().indexOf(',', 
-	                					consoleBox.getText().indexOf(',') + 1));
+	                					consoleBox.getText().indexOf(',') + 1) + 1);
 	                	//hash that pass!
 	                	String enPass = BCrypt.hashpw(pass, BCrypt.gensalt());
-	                	
+	                	consoleWin.append(user+ " " + pass + " " + email + "\n");
 	                	//send to DB
 						boolean accountMade = db.registerAccount(user, enPass, email);
 	                	
 						//was the account made?
 						if(accountMade) {
-							consoleWin.append("Account created successfully\n");
+							consoleWin.append("Account created successfully.\n");
 						}else {
 							consoleWin.append("Account creation failed.\n");
 						}
