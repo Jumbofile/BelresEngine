@@ -96,7 +96,9 @@ public class S_Network {
 			}else {
 				sendLoginStatus(false);
 			}*/
-			sendLoginStatus(db.accountExist(username, password));
+			
+			//Sends the user and pass to the db and returns if it is valid or not
+			sendLoginStatus(db.accountExist(username, password)); 
 		}catch(Exception e) {
 			
 		}

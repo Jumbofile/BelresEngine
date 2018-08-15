@@ -14,7 +14,9 @@ import org.newdawn.slick.SlickException;
  * 2D Sidescroller ORPG Engine
  * Using:
  * Slick2d
- * KryoNet
+ * Derby
+ * By: 
+ * Gregory Plachno (Jumbofile)
  */
 public class C_Main {
 	public static C_Vars vars;
