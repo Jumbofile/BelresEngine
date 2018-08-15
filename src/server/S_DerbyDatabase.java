@@ -43,7 +43,7 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 		try {
 			// retreive username attribute from login
 			stmt = conn.prepareStatement("select userName " // user attribute
-					+ "  from account " // from login table
+					+ "  from account " // from account table
 					+ "  where userName = ?"
 
 			);
