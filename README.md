@@ -34,8 +34,6 @@ Download and extract Slick2d
 
 Download and extract TWL
 
-Download and extract Kryonet
-
 Download and extract Derby
 
 Download project from github
@@ -50,8 +48,6 @@ Create a folder in the project directory called lib
 Add jinput.jar, lwjgl_util.jar, lwgjl.jar, and slick.jar from slick2d to the lib folder
 
 Add TWL.jar, and TWLEffects.jar from TWL to the lib folder
-
-Add kryonet-2.21-all.jar from Kryonet to the lib folder
 
 Add derby.jar, derbyclient.jar, derbynet.jar, derbyrun.jar, derbytools.jar to the the lib folder
 
