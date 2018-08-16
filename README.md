@@ -45,7 +45,7 @@ Open project in eclipse by clicking:
   
 Create a folder in the project directory called lib
 
-Add jinput.jar, lwjgl_util.jar, lwgjl.jar, and slick.jar from slick2d to the lib folder
+Add jinput.jar, lwjgl_util.jar, lwgjl.jar, ibxm.jar, and slick.jar from slick2d to the lib folder
 
 Add derby.jar, derbyclient.jar, derbynet.jar, derbyrun.jar, derbytools.jar to the the lib folder
 
