@@ -57,7 +57,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		 * MENU
 		 */
 		// fonts
-
+		
 		roboto14 = new TrueTypeFont(new Font("Roboto", Font.BOLD, 18), true);
 		roboto18 = new TrueTypeFont(new Font("Roboto", Font.PLAIN, 18), false);
 		// Login fields

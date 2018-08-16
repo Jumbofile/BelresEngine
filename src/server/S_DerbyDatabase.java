@@ -159,6 +159,7 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 	public void printDB(String dbName) {
 		ArrayList<String> returnStmt = new ArrayList<String>();
 		Connection conn = null;
+		String database = dbName;
 		PreparedStatement stmt = null;
 		ResultSet resultSet = null;
 		int rowCount = 0;
@@ -166,13 +167,15 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 		try {
 			
 			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
-		
-			// retreive username attribute from login
-			stmt = conn.prepareStatement(
-					"select * from account"
-			);		
-			
-			//stmt.setString(1, dbName);
+			if(dbName.toLowerCase().equals("account")) {
+				// retreive username attribute from login
+				stmt = conn.prepareStatement(
+						"select * from account"
+				);		
+			}else {
+				S_Main.consoleWin.append("Invalid database name.\n");
+			}
+			//stmt.setString(1, database);
 			// execute the query
 			
 			resultSet = stmt.executeQuery();
