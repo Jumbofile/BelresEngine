@@ -85,7 +85,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 				});
 		
 		// Load in Images 
-		menuBack 		= new Image("data/graphics/menu/back.png");
+		menuBack 		= new Image("data/graphics/menu/back2.png");
 		menuLogo 		= new Image("data/graphics/menu/logo.png");
 		menuLogin 		= new Image("data/graphics/menu/login.png");
 		menuButtonUp 	= new Image("data/graphics/menu/bup.png");
