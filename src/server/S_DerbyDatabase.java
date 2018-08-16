@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 //import gameSqldemo.SQLDemo.RowList;
 import server.S_DBUtil;
 
@@ -125,9 +127,16 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 			//harry = resultSet.getString("username");/// this might not work 
 			while(resultSet.next()) {
 				user = resultSet.getString("userName");
-				pass = resultSet.getString("password");
-				if(username.equals(user) && password.equals(pass)) {
-					exist = true;
+				//System.out.println("9" + username + "9");
+				//System.out.println("9" + user + "9");
+				if(username.equals(user)) {
+					
+					pass = resultSet.getString("password");
+					//System.out.println(password);
+					//System.out.println(pass);
+					if(BCrypt.checkpw(password, pass)) {
+						exist = true;
+					}
 				}
 				
 			}

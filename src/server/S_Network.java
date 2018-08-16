@@ -107,7 +107,7 @@ public class S_Network {
 	
 	private void sendLoginStatus(Boolean b) throws IOException {
 		out = new PrintWriter(socket.getOutputStream(), true);
-		//System.out.println(b.toString());
+		//console.append(b.toString() + "\n");
 		String packet = b.toString();
 		//out.
 		out.println(packet);

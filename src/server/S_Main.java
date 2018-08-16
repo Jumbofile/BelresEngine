@@ -75,16 +75,19 @@ public class S_Main {
 	                	String email = consoleBox.getText().substring(consoleBox.getText().indexOf(',', 
 	                					consoleBox.getText().indexOf(',') + 1) + 1);
 	                	//hash that pass!
+	                	//consoleWin.append(pass + "\n");
 	                	String enPass = BCrypt.hashpw(pass, BCrypt.gensalt());
-	                	consoleWin.append(user+ " " + pass + " " + email + "\n");
+	                	//consoleWin.append(user+ " " + pass + " " + email + "\n");
 	                	//send to DB
 						boolean accountMade = db.registerAccount(user, enPass, email);
 	                	
 						//was the account made?
 						if(accountMade) {
 							consoleWin.append("Account created successfully.\n");
+							pass = "";
 						}else {
 							consoleWin.append("Account creation failed.\n");
+							pass = "";
 						}
                 	}catch(Exception x){
                 		consoleWin.append(x.toString() + "\n");

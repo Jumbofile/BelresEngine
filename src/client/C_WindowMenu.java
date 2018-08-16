@@ -3,6 +3,8 @@ package client;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.newdawn.slick.Color;
@@ -13,6 +15,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.MouseListener;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.command.KeyControl;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.MouseOverArea;
@@ -20,7 +23,7 @@ import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class C_WindowMenu extends BasicGameState implements ActionListener {
+public class C_WindowMenu extends BasicGameState implements ActionListener, KeyListener{
 	// References
 	C_Vars vars = new C_Vars();
 
@@ -41,13 +44,15 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	private Image menuBack, menuLogo, menuButtonUp, menuButtonDown, menuButtonHover, menuLogin;
 
 	// Elements
-	TextField usernameBox, passwordBox;
+	private TextField usernameBox, passwordBox;
 	// ID we return to class 'Application'
 	public static final int ID = 0;
 	
 	//defines the network used
 	public C_WindowMenu(C_Network net) {
 		this.network = net;
+		//addKeyListener(this);
+
 	}
 	
 	// init-method for initializing all resources
@@ -56,19 +61,21 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		/*
 		 * MENU
 		 */
-		// fonts
-		
 		roboto14 = new TrueTypeFont(new Font("Roboto", Font.BOLD, 18), true);
 		roboto18 = new TrueTypeFont(new Font("Roboto", Font.PLAIN, 18), false);
 		// Login fields
 		usernameBox = new TextField(gc, roboto14, (vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150, 24,
 				new ComponentListener() {
 					public void componentActivated(AbstractComponent source) {
-						username = usernameBox.getText();
 						passwordBox.setFocus(true);
+						username = usernameBox.getText();
 					}
 				});
-
+		
+			
+		//set focus to the username box first
+		usernameBox.setFocus(true);
+		
 		// PasswordField
 		passwordBox = new TextField(gc, roboto14, (vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150, 24,
 				new ComponentListener() {
@@ -122,7 +129,6 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 			roboto14.drawString(5, 50, "Offline", Color.red);
 		}
 	}
-
 	@Override
 	public void mousePressed(int button, int x, int y)
 	{
@@ -137,8 +143,9 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 		    		loginPressed = true;
 	    			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
 	    			//System.out.println("CLONK");
-	    			String pw_hash = BCrypt.hashpw(temp, BCrypt.gensalt()); 
-	    			network.sendLogin(usernameBox.getText(), pw_hash);
+	    			//System.out.println(temp);
+	    			//String pw_hash = BCrypt.hashpw(temp, BCrypt.gensalt()); 
+	    			network.sendLogin(usernameBox.getText(), temp);
 	    			LastMoveTime = System.currentTimeMillis();
 	    			
 	    			//was the login attempt valid?
@@ -213,7 +220,6 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 			
 		}
 	}
-
 	// Returning 'ID' from class 'MainMenu'
 	public int getID() {
 		return C_WindowMenu.ID;
@@ -227,8 +233,28 @@ public class C_WindowMenu extends BasicGameState implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getKeyCode() == Input.KEY_TAB) {
+            System.out.println("HI");
+        }
+	}
 
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
+	
+	
