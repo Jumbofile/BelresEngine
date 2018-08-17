@@ -15,10 +15,7 @@ public class C_Graphics extends StateBasedGame{
     public static final int GAME         = 1;
 
     // Application Properties
-    public static final int WIDTH   = 640;
-    public static final int HEIGHT  = 480;
     public static final int FPS     = 60;
-    public static final double VERSION = 1.0;
     
     public C_Graphics(String title) {
 		super(title);

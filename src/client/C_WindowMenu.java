@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,6 +15,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.MouseListener;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.command.KeyControl;
 import org.newdawn.slick.gui.AbstractComponent;
@@ -42,7 +44,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	// Resources
 	private TrueTypeFont roboto14, roboto18;
 	private Image menuBack, menuLogo, menuButtonUp, menuButtonDown, menuButtonHover, menuLogin;
-
+	private Animation fire;
+	
 	// Elements
 	private TextField usernameBox, passwordBox;
 	// ID we return to class 'Application'
@@ -83,6 +86,10 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 						usernameBox.setFocus(true);
 					}
 				});
+		/*//menu animations
+		Image fireSheetImg = new Image("data/graphics/menu/snow.png");
+		SpriteSheet fireSheet = new SpriteSheet(fireSheetImg, 800, 600);
+		fire = new Animation(fireSheet, 80);*/
 		
 		// Load in Images 
 		menuBack 		= new Image("data/graphics/menu/back2.png");
@@ -101,10 +108,16 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		int xpos = input.getMouseX();
 		int ypos = input.getMouseY();
 		//MouseListener click = new MouseListener();
+				
 		// Render menu
 		menuBack.draw(0, 0);
+		
+		//animation
+		//fire.draw(0, 0);
+		
+		//logo
 		menuLogo.draw((vars.screenX / 2) - 330, 10);
-
+		
 		//login
 		menuLogin.draw((vars.screenX / 2) - 75, (vars.screenY / 2) - 35);
 		usernameBox.render(gmc, gr);
@@ -121,12 +134,11 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
 		}
 		
-		
 		// Connection label
 		if (network.getConnected()) {
-			roboto14.drawString(5, 50, "Online", Color.green);
+			roboto14.drawString(10, 30, "Online", Color.green);
 		} else {
-			roboto14.drawString(5, 50, "Offline", Color.red);
+			roboto14.drawString(10, 30, "Offline", Color.red);
 		}
 	}
 	@Override

@@ -14,7 +14,7 @@ public class C_Vars {
 	public String IP   		= new String("localhost");
 	
 	//screen
-	public int screenX 		= 800;
-	public int screenY 		= 600;
+	public int screenX 		= 1280;
+	public int screenY 		= 720;
 	
 }
