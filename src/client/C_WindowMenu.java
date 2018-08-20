@@ -135,11 +135,11 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		}
 		
 		// Connection label
-		if (network.getConnected()) {
-			roboto14.drawString(10, 30, "Online", Color.green);
-		} else {
-			roboto14.drawString(10, 30, "Offline", Color.red);
-		}
+		//if (network.getConnected()) {
+		//	roboto14.drawString(10, 30, "Online", Color.green);
+		//} else {
+		//	roboto14.drawString(10, 30, "Offline", Color.red);
+		//}
 	}
 	@Override
 	public void mousePressed(int button, int x, int y)

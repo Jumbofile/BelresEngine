@@ -20,12 +20,10 @@ import packets.PacketLogin;
 
 
 public class S_Network {
-	protected Socket socket;
-	private static PrintWriter out;
-	private BufferedReader brinp = null;
 	private JTextArea console;
 	private S_DerbyDatabase db;
 	private S_Vars vars;
+	private Server server;
 	
 	public S_Network(JTextArea console) {
 		this.console = console;
@@ -36,18 +34,26 @@ public class S_Network {
 	private static HashMap<String, Connection> clients = new HashMap<String, Connection>();
 	
 	public void run() throws IOException {
-			Server server = new Server();
+			server = new Server();
 		    server.start();
 		    server.bind(vars.portTCP, vars.portUDP);
 		    console.append("Server started on TCP port " + vars.portTCP + " and UDP port " + vars.portUDP + ".\n");
 		    
 		    server.addListener(new Listener() {
-		    	public void recieved(Connection con, Object obj) {
+		    	public void recieved(Connection con, Object obj) throws IOException {
 		    		if(obj instanceof Packet) {
 			    		if (obj instanceof PacketLogin) {
 			    			PacketLogin p1 = (PacketLogin) obj;
-			    			clients.put(p1.username, con);
-			    			server.sendToAllExceptTCP(con.getID(), p1);
+			    			
+			    			//does account exist and has valid information
+			    			boolean valid = db.accountExist(p1.username, p1.password);
+			    			sendLoginStatus(valid, con);
+			    			//if its valid add to the map
+			    			if(valid) {
+			    				console.append("Client " + con.getID() + " has connected.");
+				    			clients.put(p1.username, con);
+				    			server.sendToAllExceptTCP(con.getID(), p1);
+			    			}
 			    		}else if(obj instanceof PacketDisconnect) {
 			    			PacketDisconnect p2 = (PacketDisconnect) obj;
 			    			clients.remove(p2.clientName);
@@ -67,39 +73,12 @@ public class S_Network {
 		    server.getKryo().register(PacketDisconnect.class);
 		    server.getKryo().register(PacketLogin.class);
 
-		    
 	}
-	
-	//Process login, very slow but its tcp so who really cares
-	private void recieveLogin(String message, int id) {
-		int lineBreak = message.indexOf(",");
-		String username = message.substring(id + 1, lineBreak);
-		String password = message.substring(lineBreak + 1);
-		try {
-			//validate account TEMP
-			/*if(username.toLowerCase().equals("greg")) { 
-				if(BCrypt.checkpw("pass", password)){
-					sendLoginStatus(true);
-				}else {
-					sendLoginStatus(false);
-				}
-			}else {
-				sendLoginStatus(false);
-			}*/
-			
-			//Sends the user and pass to the db and returns if it is valid or not
-			sendLoginStatus(db.accountExist(username, password)); 
-		}catch(Exception e) {
-			
-		}
-		
-	}
-	
-	private void sendLoginStatus(Boolean b) throws IOException {
-		out = new PrintWriter(socket.getOutputStream(), true);
-		//console.append(b.toString() + "\n");
-		String packet = b.toString();
-		//out.
-		out.println(packet);
+	private void sendLoginStatus(Boolean b, Connection con) throws IOException {	
+		//send validity to the client
+		PacketConnected p1 = new PacketConnected();
+		p1.status = b;
+		server.sendToTCP(con.getID(), p1);
+			//server.sed
 	}
 }

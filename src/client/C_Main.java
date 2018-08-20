@@ -31,8 +31,9 @@ public class C_Main {
 		vars = new C_Vars(); //NEED FOR VARIABLES
 		
 		//starts connection
-		network = new C_Network(vars.PORT, vars.IP);
+		network = new C_Network();
 		
+		System.out.println("HM");
 		//Starts graphics
 		 try {
             AppGameContainer app = new AppGameContainer(graph = new C_Graphics("Belres Engine v" + vars.verison));

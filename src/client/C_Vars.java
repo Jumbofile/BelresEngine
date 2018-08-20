@@ -10,8 +10,9 @@ public class C_Vars {
 	public int maxFPS  		= 60;
 	
 	//network
-	public int PORT    		= 7002;
-	public String IP   		= new String("localhost");
+	public int portTCP    	= 7002;
+	public int portUDP    	= 7003;
+	public String IP   		= new String("127.0.0.1");
 	
 	//screen
 	public int screenX 		= 1280;
