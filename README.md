@@ -8,7 +8,9 @@
 
 ## Screenshots
 
-<img src="https://i.imgur.com/Uhh6aBx.jpg">
+<img src="https://i.imgur.com/dhXHUxO.jpg">
+
+<img src="https://i.imgur.com/sKuNw54.png">
 
 ## Getting Started
 
