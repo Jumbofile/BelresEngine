@@ -23,6 +23,8 @@ import javax.swing.JTextField;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import com.esotericsoftware.kryonet.Server;
+
 import gameSqldemo.DBUtil;
 
 public class S_Main {
@@ -122,26 +124,17 @@ public class S_Main {
 		frame.getContentPane().add(consoleBox);
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
+		
+		
 		//Start server networking
-		ServerSocket serverSocket = null;
-        Socket socket = null;
-        
-        try {
-            serverSocket = new ServerSocket(vars.PORT);
-            consoleWin.append("Server started on port " + vars.PORT + ".\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
-        while (true) {
-            try {
-                socket = serverSocket.accept();
-            } catch (IOException e) {
-                System.out.println("I/O error: " + e);
-            }
-            // new thread for a client
-            new S_Network(socket, consoleWin).run();
-        }
+		S_Network network = new S_Network(consoleWin);
+		try {
+			network.run();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
     }
 	
 	

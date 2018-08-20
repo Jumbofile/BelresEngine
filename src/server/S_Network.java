@@ -2,10 +2,21 @@ package server;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 
 import javax.swing.JTextArea;
 
 import org.mindrot.jbcrypt.BCrypt;
+
+import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.kryonet.Server;
+
+import packets.Packet;
+import packets.PacketChat;
+import packets.PacketConnected;
+import packets.PacketDisconnect;
+import packets.PacketLogin;
 
 
 public class S_Network {
@@ -14,70 +25,49 @@ public class S_Network {
 	private BufferedReader brinp = null;
 	private JTextArea console;
 	private S_DerbyDatabase db;
+	private S_Vars vars;
 	
-	public S_Network(Socket clientSocket, JTextArea console) {
-		this.socket = clientSocket;
+	public S_Network(JTextArea console) {
 		this.console = console;
 		db = new S_DerbyDatabase();
+		vars = new S_Vars();
 	}
 
-	public void run() {
-		InputStream inp = null;
-		
-		//DataOutputStream out = null;
-		try {
-			inp = socket.getInputStream();
-			brinp = new BufferedReader(new InputStreamReader(inp));
-			//out = new DataOutputStream(socket.getOutputStream());
-			
-		} catch (IOException e) {
-			return;
-		}
-		console.append("Client " + socket.getInetAddress() + " connected.\n" );
-		//System.out.println("Client " + socket.getInetAddress() + " connected." );
-		String line;
-		while (true) {
-			try {
-				int packetID = 0;
-				
-				/*
-				 * GARBAGE TCP LOGIN START
-				 */
-				//Recieve line from client
-				line = brinp.readLine();
-				//System.out.println(line);
-				try {
-					packetID = line.indexOf("<");
-					
-					if(line.substring(0, packetID).equals("login")) {
-						recieveLogin(line, packetID);
-					}
-					
-				}catch(Exception e) {
-					//ignore it
-				}
-				/*
-				 * GARBAGE TCP END
-				 */
-				
-				//LOGOUT WILL GO HERE
-				if ((line == null) || line.equalsIgnoreCase("QUIT")) {
-					socket.close();
-					return;
-				} else {
-					
-				}
-			} catch (IOException e) {
-				try {
-					console.append("Client " + socket.getInetAddress() + " disconnected.\n");
-					socket.close();
-				}catch (Exception x) {
-					e.printStackTrace();
-				}
-				
-				return;
-			}
-		}
+	private static HashMap<String, Connection> clients = new HashMap<String, Connection>();
+	
+	public void run() throws IOException {
+			Server server = new Server();
+		    server.start();
+		    server.bind(vars.portTCP, vars.portUDP);
+		    console.append("Server started on TCP port " + vars.portTCP + " and UDP port " + vars.portUDP + ".\n");
+		    
+		    server.addListener(new Listener() {
+		    	public void recieved(Connection con, Object obj) {
+		    		if(obj instanceof Packet) {
+			    		if (obj instanceof PacketLogin) {
+			    			PacketLogin p1 = (PacketLogin) obj;
+			    			clients.put(p1.username, con);
+			    			server.sendToAllExceptTCP(con.getID(), p1);
+			    		}else if(obj instanceof PacketDisconnect) {
+			    			PacketDisconnect p2 = (PacketDisconnect) obj;
+			    			clients.remove(p2.clientName);
+			    			server.sendToAllExceptTCP(clients.get(p2.clientName).getID(), p2);
+			    		}else if(obj instanceof PacketChat) {
+			    			PacketChat p3 = (PacketChat) obj;
+			    			server.sendToAllTCP(p3);
+			    		}
+		    		}
+		    	}
+		    });
+		    
+		    //Register classes
+		    server.getKryo().register(Packet.class);
+		    server.getKryo().register(PacketChat.class);
+		    server.getKryo().register(PacketConnected.class);
+		    server.getKryo().register(PacketDisconnect.class);
+		    server.getKryo().register(PacketLogin.class);
+
+		    
 	}
 	
 	//Process login, very slow but its tcp so who really cares

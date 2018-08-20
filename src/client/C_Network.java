@@ -11,7 +11,7 @@ public class C_Network {
 	
 	public C_Network(int port, String ip) {
 		//Start the client		
-		 try {
+		 /*try {
 				gameClient = new Socket(ip, port);
 				in = new BufferedReader(new InputStreamReader(gameClient.getInputStream()));
 				out = new PrintWriter(gameClient.getOutputStream(), true);
@@ -22,7 +22,7 @@ public class C_Network {
 				
 			} catch (Exception e) {
 				connected = false;
-			}
+			}*/
 
 	}
 	
