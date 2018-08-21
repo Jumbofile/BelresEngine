@@ -40,20 +40,26 @@ public class S_Network {
 		    console.append("Server started on TCP port " + vars.portTCP + " and UDP port " + vars.portUDP + ".\n");
 		    
 		    server.addListener(new Listener() {
-		    	public void recieved(Connection con, Object obj) throws IOException {
+		    	public void recieved(Connection con, Object obj){
 		    		if(obj instanceof Packet) {
+		    			console.append("got a packet\n");
 			    		if (obj instanceof PacketLogin) {
 			    			PacketLogin p1 = (PacketLogin) obj;
 			    			
 			    			//does account exist and has valid information
 			    			boolean valid = db.accountExist(p1.username, p1.password);
-			    			sendLoginStatus(valid, con);
-			    			//if its valid add to the map
-			    			if(valid) {
-			    				console.append("Client " + con.getID() + " has connected.");
-				    			clients.put(p1.username, con);
-				    			server.sendToAllExceptTCP(con.getID(), p1);
-			    			}
+			    			try {
+								sendLoginStatus(valid, con);
+								//if its valid add to the map
+				    			if(valid) {
+				    				console.append("Client " + con.getID() + " has connected.");
+					    			clients.put(p1.username, con);
+					    			server.sendToAllExceptTCP(con.getID(), p1);
+				    			}
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 			    		}else if(obj instanceof PacketDisconnect) {
 			    			PacketDisconnect p2 = (PacketDisconnect) obj;
 			    			clients.remove(p2.clientName);
