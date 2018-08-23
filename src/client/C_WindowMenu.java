@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
@@ -64,7 +67,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		/*
 		 * MENU
 		 */
-		roboto14 = new TrueTypeFont(new Font("Roboto", Font.BOLD, 18), true);
+		roboto14 = new TrueTypeFont(new Font("Roboto", Font.PLAIN, 18), true);
 		roboto18 = new TrueTypeFont(new Font("Roboto", Font.PLAIN, 18), false);
 		// Login fields
 		usernameBox = new TextField(gc, roboto14, (vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150, 24,
@@ -160,11 +163,12 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	    			network.sendLogin(usernameBox.getText(), temp);
 	    			LastMoveTime = System.currentTimeMillis();
 	    			
+	    			//Are you online?
+	    			if(network.connected) {
 	    			//was the login attempt valid?
-	    			if(network.loginValid()) {
-	    				loginValid = true;
+		    			
 	    			}else {
-	    				loginValid = false;
+	    				JOptionPane.showMessageDialog(new JFrame(), "Server Offline");
 	    			}
 	    		}
 	    	}
@@ -222,7 +226,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		
 		// DEBUG System.out.println(temp);
 		if(loginPressed) {
-			if(loginValid) {
+			//System.out.println(loginValid);
+			if(network.loginValid() == true) {
 				sbg.enterState(1);
 			}
 			//need to show something to let user know login was invalid

@@ -15,6 +15,7 @@ import org.newdawn.slick.SlickException;
  * Using:
  * Slick2d
  * Derby
+ * Kryonet
  * By: 
  * Gregory Plachno (Jumbofile)
  */
@@ -23,6 +24,8 @@ public class C_Main {
 	public static C_Network network;
 	public static C_Graphics graph;
 	public boolean playing = true;
+	public static AppGameContainer app;
+	
 	/*
 	 * THIS IS WHERE ARE THE MAGIC HAPPENS
 	 */
@@ -32,11 +35,10 @@ public class C_Main {
 		
 		//starts connection
 		network = new C_Network();
-		
-		System.out.println("HM");
+
 		//Starts graphics
 		 try {
-            AppGameContainer app = new AppGameContainer(graph = new C_Graphics("Belres Engine v" + vars.verison));
+			app = new AppGameContainer(graph = new C_Graphics("Belres Engine v" + vars.verison));
             app.setDisplayMode(vars.screenX, vars.screenY, false);
             app.setTargetFrameRate(vars.maxFPS);
             app.setShowFPS(true);
@@ -44,9 +46,8 @@ public class C_Main {
             app.start();
         } catch(SlickException e) {
             e.printStackTrace();
-        }
+        }	 
 		
-		 
-		 
+		//doCleanup();
 	}
 }

@@ -1,6 +1,10 @@
 package client;
 
 import java.io.*;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -14,6 +18,8 @@ import packets.PacketLogin;
 
 public class C_Network {
 	public boolean connected = false;
+	public String usernameClient = null;
+	private boolean loginValid = false;
 	//private static Socket gameClient;
 	private static BufferedReader in;
 	private static PrintWriter out;
@@ -27,13 +33,15 @@ public class C_Network {
 		//Start the client		
 		gameClient = new Client();
 		gameClient.start();
-		//System.out.println("HM");
+		
 		try {
 			gameClient.connect(5000, vars.IP, vars.portTCP, vars.portUDP);
 			connected = true;
 		} catch (IOException e) {
 			connected = false;
+			
 		}
+
 		
 		//Register classes
 	    gameClient.getKryo().register(Packet.class);
@@ -47,10 +55,11 @@ public class C_Network {
 	    		if(object instanceof Packet){
 	    			if(object instanceof PacketConnected) {
 	    				PacketConnected p1 = (PacketConnected) object;
-	    				connected = true;
+	    				loginValid = p1.status;
+	    				
 	    			}else if(object instanceof PacketDisconnect) {
 	    				PacketDisconnect p2 = (PacketDisconnect) object;
-	    				connected = false;
+	    				loginValid = false;
 	    			}
 	    		}
 	    	}
@@ -61,14 +70,26 @@ public class C_Network {
 	public void sendLogin(String username, String password) {
 		//send login information
 		PacketLogin p1 = new PacketLogin();
+		usernameClient = username;
 		p1.username = username;
 		p1.password = password;
-		System.out.println("Sent");
+		//System.out.println("Sent");
 		gameClient.sendTCP(p1);
 	}
+	
+	//send login to the server
+		public void sendDisconnect() {
+			//send login information
+			if(usernameClient.equals(null)) {
+				
+			}else {
+				PacketDisconnect p1 = new PacketDisconnect();
+				p1.clientName = usernameClient;
+				gameClient.sendTCP(p1);
+			}
+		}
 
 	public boolean loginValid() {
-		
-		return connected;
+		return loginValid;
 	}
 }

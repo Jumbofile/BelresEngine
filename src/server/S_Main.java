@@ -62,9 +62,16 @@ public class S_Main {
             {
                 consoleWin.append(consoleBox.getText() + "\n");
                 
-                /*
+                /*S
                  * CONSOLE COMMANDS
                  */
+                
+                //Help command "/help"
+                if(consoleBox.getText().toLowerCase().startsWith("/help")) {
+                	consoleWin.append("Available Commands: \n");
+                	consoleWin.append("/addnewuser \n");
+                	consoleWin.append("/sql \n");
+                }
                 
                 //register a new user with format /addnewuser username,password,email
                 if(consoleBox.getText().toLowerCase().startsWith("/addnewuser")) {

@@ -32,6 +32,4 @@ public class C_Graphics extends StateBasedGame{
         this.addState(new C_WindowMenu(network));
         this.addState(new C_WindowGame());
     }
-    
-
 }

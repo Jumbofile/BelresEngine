@@ -50,13 +50,13 @@ public class S_Network {
 			    			//does account exist and has valid information
 			    			boolean valid = db.accountExist(p1.username, p1.password);
 			    			try {
-								sendLoginStatus(valid, connection);
 								//if its valid add to the map
 				    			if(valid) {
 				    				console.append("Client " + connection.getID() + " has connected.");
 					    			clients.put(p1.username, connection);
 					    			server.sendToAllExceptTCP(connection.getID(), p1);
 				    			}
+				    			sendLoginStatus(valid, connection);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -64,7 +64,8 @@ public class S_Network {
 			    		}else if(object instanceof PacketDisconnect) {
 			    			PacketDisconnect p2 = (PacketDisconnect) object;
 			    			clients.remove(p2.clientName);
-			    			server.sendToAllExceptTCP(clients.get(p2.clientName).getID(), p2);
+			    			console.append("Client " + connection.getID() + " has disconnected.");
+			    			//server.sendToAllExceptTCP(clients.get(p2.clientName).getID(), p2);
 			    		}else if(object instanceof PacketChat) {
 			    			PacketChat p3 = (PacketChat) object;
 			    			server.sendToAllTCP(p3);
@@ -83,6 +84,7 @@ public class S_Network {
 	}
 	private void sendLoginStatus(Boolean b, Connection con) throws IOException {	
 		//send validity to the client
+		//System.out.print(b);
 		PacketConnected p1 = new PacketConnected();
 		p1.status = b;
 		server.sendToTCP(con.getID(), p1);
