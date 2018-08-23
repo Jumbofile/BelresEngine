@@ -40,32 +40,33 @@ public class S_Network {
 		    console.append("Server started on TCP port " + vars.portTCP + " and UDP port " + vars.portUDP + ".\n");
 		    
 		    server.addListener(new Listener() {
-		    	public void recieved(Connection con, Object obj){
-		    		if(obj instanceof Packet) {
-		    			console.append("got a packet\n");
-			    		if (obj instanceof PacketLogin) {
-			    			PacketLogin p1 = (PacketLogin) obj;
+		    	public void received (Connection connection, Object object) {
+		    		//System.out.println("WHAT");
+		    		if(object instanceof Packet) {
+		    			console.append("Got a packet\n");
+			    		if (object instanceof PacketLogin) {
+			    			PacketLogin p1 = (PacketLogin) object;
 			    			
 			    			//does account exist and has valid information
 			    			boolean valid = db.accountExist(p1.username, p1.password);
 			    			try {
-								sendLoginStatus(valid, con);
+								sendLoginStatus(valid, connection);
 								//if its valid add to the map
 				    			if(valid) {
-				    				console.append("Client " + con.getID() + " has connected.");
-					    			clients.put(p1.username, con);
-					    			server.sendToAllExceptTCP(con.getID(), p1);
+				    				console.append("Client " + connection.getID() + " has connected.");
+					    			clients.put(p1.username, connection);
+					    			server.sendToAllExceptTCP(connection.getID(), p1);
 				    			}
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-			    		}else if(obj instanceof PacketDisconnect) {
-			    			PacketDisconnect p2 = (PacketDisconnect) obj;
+			    		}else if(object instanceof PacketDisconnect) {
+			    			PacketDisconnect p2 = (PacketDisconnect) object;
 			    			clients.remove(p2.clientName);
 			    			server.sendToAllExceptTCP(clients.get(p2.clientName).getID(), p2);
-			    		}else if(obj instanceof PacketChat) {
-			    			PacketChat p3 = (PacketChat) obj;
+			    		}else if(object instanceof PacketChat) {
+			    			PacketChat p3 = (PacketChat) object;
 			    			server.sendToAllTCP(p3);
 			    		}
 		    		}

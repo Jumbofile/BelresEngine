@@ -43,13 +43,13 @@ public class C_Network {
 	    gameClient.getKryo().register(PacketLogin.class);
 	    
 	    gameClient.addListener(new Listener(){
-	    	public void recieved(Connection con, Object obj) {
-	    		if(obj instanceof Packet){
-	    			if(obj instanceof PacketConnected) {
-	    				PacketConnected p1 = (PacketConnected) obj;
+	    	public void received (Connection connection, Object object) { 
+	    		if(object instanceof Packet){
+	    			if(object instanceof PacketConnected) {
+	    				PacketConnected p1 = (PacketConnected) object;
 	    				connected = true;
-	    			}else if(obj instanceof PacketDisconnect) {
-	    				PacketDisconnect p2 = (PacketDisconnect) obj;
+	    			}else if(object instanceof PacketDisconnect) {
+	    				PacketDisconnect p2 = (PacketDisconnect) object;
 	    				connected = false;
 	    			}
 	    		}

@@ -12,7 +12,7 @@ public class C_Vars {
 	//network
 	public int portTCP    	= 7002;
 	public int portUDP    	= 7003;
-	public String IP   		= new String("localhost");
+	public String IP   		= new String("127.0.0.1");
 	
 	//screen
 	public int screenX 		= 1280;
