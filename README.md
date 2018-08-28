@@ -24,7 +24,7 @@ Slick2d     - http://slick.ninjacave.com/
 
 JDK         - https://www.oracle.com/technetwork/java/javase/downloads/index.html
 
-TWL         - http://twl.l33tlabs.org/
+Kryonet     - https://github.com/EsotericSoftware/kryonet/releases
 
 Apche Derby - https://db.apache.org/derby/
 
@@ -35,6 +35,8 @@ Download and install JDK
 Download and install Eclipse
 
 Download and extract Slick2d
+
+Download and extract Kryonet
 
 Download and extract Derby
 
@@ -51,7 +53,11 @@ Add jinput.jar, lwjgl_util.jar, lwgjl.jar, ibxm.jar, and slick.jar from slick2d 
 
 Add derby.jar, derbyclient.jar, derbynet.jar, derbyrun.jar, derbytools.jar to the the lib folder
 
+Add kryonet-2.21-all.jar to the lib folder
+
 *If errors arise, rick click the project in the package explore and click properties. Go to Java build path and then click on the libraries tab. If there is a jar file missing, click add JAR and navigate to the lib folder and ctrl-click all of them, then click add.
+
+*If you are using itellij, add them to the same folder then highlight them all, right click and then select "Add library"
 
 ## Deployment
 
