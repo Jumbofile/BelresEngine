@@ -228,6 +228,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		if(loginPressed) {
 			//System.out.println(loginValid);
 			if(network.loginValid() == true) {
+				vars.stillPlaying = true;
 				sbg.enterState(1);
 			}
 			//need to show something to let user know login was invalid

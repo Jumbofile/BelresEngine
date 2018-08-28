@@ -48,6 +48,15 @@ public class C_Main {
             e.printStackTrace();
         }	 
 		
-		//doCleanup();
+		doCleanup();
+	}
+	
+	public static void doCleanup() {
+		if(vars.stillPlaying) {
+			System.out.println("yeet");
+			
+		}else {
+			
+		}
 	}
 }
