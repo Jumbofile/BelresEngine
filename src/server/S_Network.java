@@ -1,17 +1,11 @@
 package server;
 
 import java.io.*;
-import java.net.*;
 import java.util.HashMap;
-
 import javax.swing.JTextArea;
-
-import org.mindrot.jbcrypt.BCrypt;
-
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-
 import packets.Packet;
 import packets.PacketChat;
 import packets.PacketConnected;

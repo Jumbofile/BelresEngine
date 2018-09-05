@@ -1,15 +1,9 @@
 package client;
 
 import java.io.*;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-
 import packets.Packet;
 import packets.PacketChat;
 import packets.PacketConnected;
@@ -20,9 +14,6 @@ public class C_Network {
 	public boolean connected = false;
 	public String usernameClient = null;
 	private boolean loginValid = false;
-	//private static Socket gameClient;
-	private static BufferedReader in;
-	private static PrintWriter out;
 	private Client gameClient = new Client();
 	
 	public C_Network() {
@@ -41,7 +32,6 @@ public class C_Network {
 			connected = false;
 			
 		}
-
 		
 		//Register classes
 	    gameClient.getKryo().register(Packet.class);

@@ -1,18 +1,8 @@
 package server;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
@@ -20,12 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.esotericsoftware.kryonet.Server;
-
-import gameSqldemo.DBUtil;
 
 public class S_Main {
 	
@@ -57,7 +43,12 @@ public class S_Main {
 		//is enter hit
         Action action = new AbstractAction()
         {
-            @Override
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
             public void actionPerformed(ActionEvent e)
             {
                 consoleWin.append(consoleBox.getText() + "\n");
