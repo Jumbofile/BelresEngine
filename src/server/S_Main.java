@@ -44,7 +44,7 @@ public class S_Main {
         Action action = new AbstractAction()
         {
             /**
-			 * 
+			 * eclipse made me do this
 			 */
 			private static final long serialVersionUID = 1L;
 
@@ -118,6 +118,7 @@ public class S_Main {
             }
         };
         
+        //jframe stuff
         consoleBox.addActionListener( action );
 		frame.getContentPane().add(consoleBox);
 		frame.getContentPane().add(panel);

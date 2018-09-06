@@ -57,13 +57,16 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		/*
 		 * MENU
 		 */
+		
+		//fonts
 		roboto14 = new TrueTypeFont(new Font("Roboto", Font.PLAIN, 18), true);
 		roboto18 = new TrueTypeFont(new Font("Roboto", Font.PLAIN, 18), false);
+		
 		// Login fields
 		usernameBox = new TextField(gc, roboto14, (vars.screenX / 2) - 75, (vars.screenY / 2) - 20, 150, 24,
 				new ComponentListener() {
 					public void componentActivated(AbstractComponent source) {
-						passwordBox.setFocus(true);
+						//passwordBox.setFocus(true);
 						username = usernameBox.getText();
 					}
 				});
@@ -76,10 +79,11 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		passwordBox = new TextField(gc, roboto14, (vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150, 24,
 				new ComponentListener() {
 					public void componentActivated(AbstractComponent source) {
-						usernameBox.setFocus(true);
+						//usernameBox.setFocus(true);
 					}
 				});
-		/*//menu animations
+		
+		/*//menu animations reference
 		Image fireSheetImg = new Image("data/graphics/menu/snow.png");
 		SpriteSheet fireSheet = new SpriteSheet(fireSheetImg, 800, 600);
 		fire = new Animation(fireSheet, 80);*/
@@ -137,8 +141,10 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	@Override
 	public void mousePressed(int button, int x, int y)
 	{
+		//Left click
 	    if( button == 0 )
 	    {
+	    	//Button location
 	    	if(x > (vars.screenX / 2) - (120 / 2) && x < (vars.screenX / 2) + (120 / 2) &&
 					y > (vars.screenY / 2) + 45 && y < (vars.screenY / 2) + 94) {
 	    		if(usernameBox.getText().equals("") || usernameBox.getText().equals(null) ||
@@ -147,9 +153,6 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	    		}else {
 		    		loginPressed = true;
 	    			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
-	    			//System.out.println("CLONK");
-	    			//System.out.println(temp);
-	    			//String pw_hash = BCrypt.hashpw(temp, BCrypt.gensalt()); 
 	    			network.sendLogin(usernameBox.getText(), temp);
 	    			LastMoveTime = System.currentTimeMillis();
 	    			
@@ -169,15 +172,33 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	
 	// update-method with all the magic happening in it
 	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
+	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {	
 		//mouse
 		Input input = gc.getInput();
 		int xpos = input.getMouseX();
 		int ypos = input.getMouseY();
+		
+		//changing focus with tab
+		if (input.isKeyDown(Input.KEY_TAB)) {
+			 try {
+				if(usernameBox.hasFocus()) {
+					usernameBox.setFocus(false);
+					passwordBox.setFocus(true);
+					Thread.sleep(200);
+				}else if(passwordBox.hasFocus()) {
+					passwordBox.setFocus(false);
+					usernameBox.setFocus(true);
+					Thread.sleep(200);
+				}
+			 } catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		 }
+		
 		/*
 		 * This stars out the password in the textfield
 		 */
-
 		// If backspace was pressed chop a char off of temp
 		if (gc.getInput().isKeyPressed(Input.KEY_BACK)) {
 			// No OutOfBounds here
@@ -227,6 +248,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 			}
 			
 		}
+		
+		
 	}
 	// Returning 'ID' from class 'MainMenu'
 	public int getID() {
