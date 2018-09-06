@@ -17,7 +17,6 @@ public class C_Network {
 	private Client gameClient = new Client();
 	
 	public C_Network() {
-		//System.out.println("HM");
 		//set up variables
 		C_Vars vars = new C_Vars();
 		

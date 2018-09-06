@@ -416,6 +416,9 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+				PreparedStatement stmt4 = null;
 								
 				try {
 					stmt1 = conn.prepareStatement( //creates account table
@@ -429,10 +432,45 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 						")"
 					);	
 					stmt1.executeUpdate();
+					
+					stmt2 = conn.prepareStatement( //creates character table
+						"create table character (" +
+						"	char_id integer primary key " +
+						"		generated always as identity (start with 1, increment by 1), " +									
+						"	account_id int," +
+						"	map_id int,"+
+						"   map_cord varchar(40),"    +
+						"   type varchar(40)"      +
+						")"
+					);	
+					stmt2.executeUpdate();
+					
+					stmt3 = conn.prepareStatement( //creates inventory table
+						"create table Inventory (" +									
+						"	account_id int," +
+						"	item_id varchar(500),"+
+						"   item_quantity varchar(500)" +     
+						")"
+					);	
+					stmt3.executeUpdate();
 						
+					stmt4 = conn.prepareStatement( //creates Item table
+						"create table Items(" +									
+						"	item_id int," +
+						"	name varchar(50),"+
+						"	type varchar(40),"+
+						"	level varchar(40),"+
+						"	stats varchar(500),"+
+						"   item_quantity varchar(500)" +     
+						")"
+					);	
+					stmt4.executeUpdate();
 					return true;
 				} finally {
 					S_DBUtil.closeQuietly(stmt1);
+					S_DBUtil.closeQuietly(stmt2);
+					S_DBUtil.closeQuietly(stmt3);
+					S_DBUtil.closeQuietly(stmt4);
 				}
 			}
 		});
