@@ -59,7 +59,7 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 		ResultSet resultSet = null;
 		
 
-		conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		conn = DriverManager.getConnection("jdbc:derby:belres.db;create=true");
 
 		try {
 			// retreive username attribute from login
@@ -114,7 +114,7 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 		
 		try {
 			
-			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+			conn = DriverManager.getConnection("jdbc:derby:belres.db;create=true");
 		
 			// retreive username attribute from login
 			stmt = conn.prepareStatement(
@@ -175,7 +175,7 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 		
 		try {
 			
-			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+			conn = DriverManager.getConnection("jdbc:derby:belres.db;create=true");
 			if(dbName.toLowerCase().equals("account")) {
 				// retreive username attribute from login
 				stmt = conn.prepareStatement(
@@ -314,7 +314,7 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 	}
 
 	private Connection connect() throws SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+		Connection conn = DriverManager.getConnection("jdbc:derby:belres.db;create=true");
 		
 		// Set autocommit to false to allow execution of
 		// multiple queries/statements as part of the same transaction.
@@ -433,10 +433,10 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 					);	
 					stmt1.executeUpdate();
 					
+					
 					stmt2 = conn.prepareStatement( //creates character table
 						"create table character (" +
-						"	char_id integer primary key " +
-						"		generated always as identity (start with 1, increment by 1), " +									
+						"	char_id integer primary key generated always as identity (start with 1, increment by 1)," +									
 						"	account_id int," +
 						"	map_id int,"+
 						"   map_cord varchar(40),"    +
@@ -446,7 +446,7 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 					stmt2.executeUpdate();
 					
 					stmt3 = conn.prepareStatement( //creates inventory table
-						"create table Inventory (" +									
+						"create table inventory (" +									
 						"	account_id int," +
 						"	item_id varchar(500),"+
 						"   item_quantity varchar(500)" +     
@@ -455,7 +455,7 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 					stmt3.executeUpdate();
 						
 					stmt4 = conn.prepareStatement( //creates Item table
-						"create table Items(" +									
+						"create table items(" +									
 						"	item_id int," +
 						"	name varchar(50),"+
 						"	type varchar(40),"+
