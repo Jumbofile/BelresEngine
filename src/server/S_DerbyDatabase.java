@@ -435,12 +435,13 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 					
 					
 					stmt2 = conn.prepareStatement( //creates character table
-						"create table character (" +
-						"	char_id integer primary key generated always as identity (start with 1, increment by 1)," +									
-						"	account_id int," +
-						"	map_id int,"+
-						"   map_cord varchar(40),"    +
-						"   type varchar(40)"      +
+						"create table toons (" +
+						"	char_id integer primary key" +
+						"		generated always as identity (start with 1, increment by 1), " +
+						"	account_id int," 		+
+						"	map_id int,"			+
+						"   map_cord varchar(40)," 	+
+						"   type varchar(40)"      	+
 						")"
 					);	
 					stmt2.executeUpdate();

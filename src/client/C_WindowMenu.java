@@ -22,7 +22,6 @@ import org.newdawn.slick.state.StateBasedGame;
 public class C_WindowMenu extends BasicGameState implements ActionListener, KeyListener{
 	// References
 	C_Vars vars = new C_Vars();
-
 	// Vars
 	public boolean connected;
 	private String username = new String();
@@ -32,26 +31,24 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	private boolean loginPressed = false;
 	private double LastMoveTime;
 	private boolean loginValid = false;
-	
 	//Classes
 	C_Network network;
 	// Resources
 	private TrueTypeFont roboto14, roboto18;
 	private Image menuBack, menuLogo, menuButtonUp, menuButtonDown, menuButtonHover, menuLogin;
-	
 	// Elements
 	private TextField usernameBox, passwordBox;
 	// ID we return to class 'Application'
 	public static final int ID = 0;
-	
-	//defines the network used
+
+	//region Constructor
 	public C_WindowMenu(C_Network net) {
 		this.network = net;
 		//addKeyListener(this);
 
 	}
-	
-	// init-method for initializing all resources
+	//endregion
+	//region Init
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		/*
@@ -74,7 +71,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 			
 		//set focus to the username box first
 		usernameBox.setFocus(true);
-		
+
 		// PasswordField
 		passwordBox = new TextField(gc, roboto14, (vars.screenX / 2) - 75, (vars.screenY / 2) + 20, 150, 24,
 				new ComponentListener() {
@@ -96,8 +93,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		menuButtonDown 	= new Image("data/graphics/menu/bdown.png");
 		menuButtonHover = new Image("data/graphics/menu/bhover.png");
 	}
-
-	// render-method for all the things happening on-screen
+    //endregion
+	//region Render
 	@Override
 	public void render(GameContainer gmc, StateBasedGame sbg, Graphics gr) throws SlickException {
 		//mouse
@@ -138,6 +135,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		//	roboto14.drawString(10, 30, "Offline", Color.red);
 		//}
 	}
+	//endregion
+	//region Mouse
 	@Override
 	public void mousePressed(int button, int x, int y)
 	{
@@ -169,7 +168,9 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	    	loginPressed = false;
 	    }
 	}
-	
+
+	//endregion
+	//region Update
 	// update-method with all the magic happening in it
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {	
@@ -251,6 +252,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		
 		
 	}
+	//endregion
+	//region Unused
 	// Returning 'ID' from class 'MainMenu'
 	public int getID() {
 		return C_WindowMenu.ID;
@@ -271,7 +274,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == Input.KEY_TAB) {
-            System.out.println("HI");
+           // System.out.println("HI");
         }
 	}
 
@@ -286,6 +289,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		// TODO Auto-generated method stub
 		
 	}
+	//endregion
 }
 	
 	
