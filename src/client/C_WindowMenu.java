@@ -42,8 +42,8 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	public static final int ID = 0;
 
 	//region Constructor
-	public C_WindowMenu(C_Network net) {
-		this.network = net;
+	public C_WindowMenu(C_Network network) {
+		this.network = network;
 		//addKeyListener(this);
 
 	}

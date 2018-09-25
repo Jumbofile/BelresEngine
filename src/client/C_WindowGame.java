@@ -15,9 +15,11 @@ public class C_WindowGame extends BasicGameState {
 	private C_Player mainPlayer;
 	private C_Network network;
 
+	//Constructor
 	public C_WindowGame(C_Network network){
 		this.network = network;
 	}
+
 	// init-method for initializing all resources
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {

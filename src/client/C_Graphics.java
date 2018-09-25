@@ -30,6 +30,6 @@ public class C_Graphics extends StateBasedGame{
     public void initStatesList(GameContainer gc) throws SlickException {
         // The first state added will be the one that is loaded first, when the application is launched
         this.addState(new C_WindowMenu(network));
-        this.addState(new C_WindowGame());
+        this.addState(new C_WindowGame(network));
     }
 }
