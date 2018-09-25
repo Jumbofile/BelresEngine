@@ -7,14 +7,17 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class C_WindowGame extends BasicGameState {
-
+	/**
+	 * MAIN GAME WINDOW
+	 */
 	// ID we return to class 'Application'
 	public static final int ID = 1;
+	private C_Player mainPlayer;
 
 	// init-method for initializing all resources
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		
+		//C_Player mainPlayer = new C_Player(name);
 	}
 
 	// render-method for all the things happening on-screen

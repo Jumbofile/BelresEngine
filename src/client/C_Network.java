@@ -11,7 +11,7 @@ import packets.PacketDisconnect;
 import packets.PacketLogin;
 
 public class C_Network {
-	public boolean connected = false;
+	private boolean connected = false;
 	public String usernameClient = null;
 	private boolean loginValid = false;
 	private Client gameClient = new Client();

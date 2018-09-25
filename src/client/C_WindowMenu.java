@@ -154,14 +154,6 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 	    			menuButtonDown.draw((vars.screenX / 2) - (120 / 2), (vars.screenY / 2) + 45, 120, 49);
 	    			network.sendLogin(usernameBox.getText(), temp);
 	    			LastMoveTime = System.currentTimeMillis();
-	    			
-	    			//Are you online?
-	    			if(network.connected) {
-	    			//was the login attempt valid?
-		    			
-	    			}else {
-	    				JOptionPane.showMessageDialog(new JFrame(), "Server Offline");
-	    			}
 	    		}
 	    	}
 	    }else {
@@ -239,9 +231,13 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 		// DEBUG System.out.println(temp);
 		if(loginPressed) {
 			//System.out.println(loginValid);
+			//THIS IS WHERE THE LOGON CONFIRM IS
 			if(network.loginValid() == true) {
 				vars.stillPlaying = true;
 				sbg.enterState(1);
+			}else{
+				JOptionPane.showMessageDialog(new JFrame(), "Incorrect login details");
+
 			}
 			//need to show something to let user know login was invalid
 			if(System.currentTimeMillis() - LastMoveTime >= 150){ 
