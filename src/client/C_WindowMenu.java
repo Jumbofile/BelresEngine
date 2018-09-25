@@ -234,6 +234,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 			//THIS IS WHERE THE LOGON CONFIRM IS
 			if(network.loginValid() == true) {
 				vars.stillPlaying = true;
+
 				sbg.enterState(1);
 			}else{
 				JOptionPane.showMessageDialog(new JFrame(), "Incorrect login details");
@@ -243,10 +244,7 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 			if(System.currentTimeMillis() - LastMoveTime >= 150){ 
 				loginPressed = false;
 			}
-			
 		}
-		
-		
 	}
 	//endregion
 	//region Unused
