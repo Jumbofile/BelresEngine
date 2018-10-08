@@ -235,10 +235,12 @@ public class C_WindowMenu extends BasicGameState implements ActionListener, KeyL
 			if(network.loginValid() == true) {
 				vars.stillPlaying = true;
 
+				//set username
+
 				sbg.enterState(1);
 			}else{
+				//Change this soon
 				JOptionPane.showMessageDialog(new JFrame(), "Incorrect login details");
-
 			}
 			//need to show something to let user know login was invalid
 			if(System.currentTimeMillis() - LastMoveTime >= 150){ 

@@ -7,10 +7,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import packets.Packet;
-import packets.PacketChat;
-import packets.PacketConnected;
-import packets.PacketDisconnect;
-import packets.PacketLogin;
+import packets.*;
 
 
 public class S_Network {
@@ -74,6 +71,7 @@ public class S_Network {
 		    server.getKryo().register(PacketConnected.class);
 		    server.getKryo().register(PacketDisconnect.class);
 		    server.getKryo().register(PacketLogin.class);
+		    server.getKryo().register(PacketPos.class);
 
 	}
 	private void sendLoginStatus(Boolean b, Connection con) throws IOException {	

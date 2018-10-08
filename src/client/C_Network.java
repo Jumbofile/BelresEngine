@@ -15,7 +15,8 @@ public class C_Network {
 	public String usernameClient = null;
 	private boolean loginValid = false;
 	private Client gameClient = new Client();
-	
+	private C_Player player;
+
 	public C_Network() {
 		//set up variables
 		C_Vars vars = new C_Vars();
@@ -38,15 +39,21 @@ public class C_Network {
 	    gameClient.getKryo().register(PacketConnected.class);
 	    gameClient.getKryo().register(PacketDisconnect.class);
 	    gameClient.getKryo().register(PacketLogin.class);
-	    
+
+	    //Packet listener
 	    gameClient.addListener(new Listener(){
 	    	public void received (Connection connection, Object object) { 
 	    		if(object instanceof Packet){
+
+	    		    //If the packet received was a Connected Packet
 	    			if(object instanceof PacketConnected) {
 	    				PacketConnected p1 = (PacketConnected) object;
 	    				loginValid = p1.status;
-	    				
-	    			}else if(object instanceof PacketDisconnect) {
+                        player = new C_Player(usernameClient);
+
+	    			}
+                    //If the packet received was a Disconnected Packet
+	    			else if(object instanceof PacketDisconnect) {
 	    				PacketDisconnect p2 = (PacketDisconnect) object;
 	    				loginValid = false;
 	    			}
@@ -80,5 +87,9 @@ public class C_Network {
 
 	public boolean loginValid() {
 		return loginValid;
+	}
+
+	public boolean getConnected(){
+		return connected;
 	}
 }
