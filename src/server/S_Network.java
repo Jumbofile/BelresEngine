@@ -79,6 +79,7 @@ public class S_Network {
 		//System.out.print(b);
 		PacketConnected p1 = new PacketConnected();
 		p1.status = b;
+		p1.map =
 		server.sendToTCP(con.getID(), p1);
 			//server.sed
 	}

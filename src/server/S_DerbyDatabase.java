@@ -88,10 +88,29 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 
 				stmt2.execute();
 
-				return true;
+				int accountID = getAccountID(userName);
+
+				if(accountID != -1) {
+					//make the character
+					stmt2 = conn.prepareStatement( // enter username
+							"insert into toons(account_id, map_id, x, y, type)" + "values(?, ?, ?, ?, ?)");
+
+					stmt2.setInt(1, accountID);
+					stmt2.setInt(2, 1);
+					stmt2.setInt(3, -1);
+					stmt2.setInt(4, -1);
+					stmt2.setString(5, "normal");
+
+					stmt2.execute();
+
+					return true;
+				}else{
+					return false;
+				}
 			} else {
 				return false; // username already exists
 			}
+
 
 		} finally {
 			S_DBUtil.closeQuietly(resultSet);
@@ -101,6 +120,27 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 		}
 	}
 
+	public int getAccountID(String username) throws SQLException{
+		int id = -1;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+
+        // retreive username attribute from login
+        stmt = conn.prepareStatement("login_id " // user attribute
+                + "  from account " // from account table
+                + "  where userName = ?"
+
+        );
+
+        resultSet = stmt.executeQuery();
+
+        if (!resultSet.next()) {
+            id = resultSet.getRow();
+        }
+
+		return id;
+	}
 	public boolean accountExist(String username, String password){ ///checks if account exists
 		//Checks if the user exist and if the password matches
 		
@@ -440,7 +480,8 @@ public class S_DerbyDatabase implements S_IDatabase { /// most of the gamePersis
 						"		generated always as identity (start with 1, increment by 1), " +
 						"	account_id int," 		+
 						"	map_id int,"			+
-						"   map_cord varchar(40)," 	+
+						"   x int," 				+
+						"   y int," 				+
 						"   type varchar(40)"      	+
 						")"
 					);	
