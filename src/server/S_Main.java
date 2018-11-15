@@ -21,7 +21,7 @@ public class S_Main {
 	public static void main(String[] args) {
 		//Initialize the server
 		S_Vars vars = new S_Vars();
-		S_DerbyDatabase db = new S_DerbyDatabase();
+		S_Database db = new S_Database();
 		    
 		//Start server gui
 		JFrame frame = new JFrame("Belres Server");

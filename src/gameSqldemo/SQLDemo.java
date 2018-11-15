@@ -39,8 +39,8 @@ public class SQLDemo {
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		Connection conn = null;
 		try {
-			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-			conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+			Class.forName("org.h2.Driver");
+			conn = DriverManager.getConnection("jdbc:h2:./belres.db;create=true");
 			conn.setAutoCommit(true);
 	
 			queryLoop(conn);

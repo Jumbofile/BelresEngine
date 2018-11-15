@@ -12,13 +12,13 @@ import packets.*;
 
 public class S_Network {
 	private JTextArea console;
-	private S_DerbyDatabase db;
+	private S_Database db;
 	private S_Vars vars;
 	private Server server;
 	
 	public S_Network(JTextArea console) {
 		this.console = console;
-		db = new S_DerbyDatabase();
+		db = new S_Database();
 		vars = new S_Vars();
 	}
 
@@ -79,7 +79,7 @@ public class S_Network {
 		//System.out.print(b);
 		PacketConnected p1 = new PacketConnected();
 		p1.status = b;
-		p1.map =
+		//p1.map =
 		server.sendToTCP(con.getID(), p1);
 			//server.sed
 	}
