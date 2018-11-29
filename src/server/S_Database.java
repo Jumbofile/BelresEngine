@@ -15,7 +15,7 @@ import org.mindrot.jbcrypt.BCrypt;
 //import gameSqldemo.SQLDemo.RowList;
 import server.S_DBUtil;
 
-public class S_Database implements S_IDatabase { /// most of the gamePersist package taken from Lab06 ----CITING
+public class S_Database implements S_IDatabase {
 	static {
 		try {
 			Class.forName("org.h2.Driver");
@@ -465,32 +465,34 @@ public class S_Database implements S_IDatabase { /// most of the gamePersist pac
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
 				PreparedStatement stmt4 = null;
-								
+
+				System.out.println("Creating account table...");
 				try {
 					stmt1 = conn.prepareStatement( //creates account table
-						"create table account (" +
-						"	login_id bigint auto_increment" +
-						"	userName varchar(40)," +
-						"	password varchar(100),"+
-						"   email varchar(40),"    +
-						"   type varchar(40)"      +
+						"create table account(" +
+						"login_id bigint auto_increment, " +
+						"userName varchar(40)," +
+						"password varchar(100),"+
+						"email varchar(40),"    +
+						"type varchar(40)"      +
 						")"
 					);	
 					stmt1.executeUpdate();
-					
-					
+					System.out.println("Success!");
+					System.out.println("Creating toon table...");
 					stmt2 = conn.prepareStatement( //creates character table
-						"create table toons (" +
-						"	char_id bigint auto_increment" +
-						"	account_id int," 		+
-						"	map_id int,"			+
-						"   x int," 				+
-						"   y int," 				+
-						"   type varchar(40)"      	+
+						"create table toons(" +
+						"char_id bigint auto_increment, " +
+						"account_id int," 		+
+						"map_id int,"			+
+						"x int," 				+
+						"y int," 				+
+						"type varchar(40)"      	+
 						")"
 					);	
 					stmt2.executeUpdate();
-					
+					System.out.println("Success!");
+					System.out.println("Creating inventory table...");
 					stmt3 = conn.prepareStatement( //creates inventory table
 						"create table inventory (" +									
 						"	account_id int," +
@@ -499,7 +501,8 @@ public class S_Database implements S_IDatabase { /// most of the gamePersist pac
 						")"
 					);	
 					stmt3.executeUpdate();
-						
+					System.out.println("Success!");
+					System.out.println("Creating item table...");
 					stmt4 = conn.prepareStatement( //creates Item table
 						"create table items(" +									
 						"	item_id int," +
@@ -509,8 +512,9 @@ public class S_Database implements S_IDatabase { /// most of the gamePersist pac
 						"	stats varchar(500),"+
 						"   item_quantity varchar(500)" +     
 						")"
-					);	
+					);
 					stmt4.executeUpdate();
+					System.out.println("Success!");
 					return true;
 				} finally {
 					S_DBUtil.closeQuietly(stmt1);
@@ -532,7 +536,7 @@ public class S_Database implements S_IDatabase { /// most of the gamePersist pac
 		S_Database db = new S_Database();
 		db.createTables();
 		
-		System.out.println("Loading initial data...");
+
 		db.loadInitialData();
 		
 		System.out.println("Success!");

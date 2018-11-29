@@ -1,0 +1,12 @@
+2018-11-29 14:35:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE ACCOUNT (	LOGIN_ID BIGINT AUTO_INCREMENT	USERNAME[*] VARCHAR(40),	PASSWORD VARCHAR(100),   EMAIL VARCHAR(40),   TYPE VARCHAR(40)) "; expected "(, NOT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table account (	login_id bigint auto_increment	userName varchar(40),	password varchar(100),   email varchar(40),   type varchar(40)) [42001-192]
+2018-11-29 16:18:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE ACCOUNT (	LOGIN_ID BIGINT AUTO_INCREMENT)	USERNAME[*] VARCHAR(40),	PASSWORD VARCHAR(100),   EMAIL VARCHAR(40),   TYPE VARCHAR(40)) "; SQL statement:
+create table account (	login_id bigint auto_increment)	userName varchar(40),	password varchar(100),   email varchar(40),   type varchar(40)) [42000-192]
+2018-11-29 16:19:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE ACCOUNT(	LOGIN_ID BIGINT AUTO_INCREMENT	USERNAME[*] VARCHAR(40),	PASSWORD VARCHAR(100),   EMAIL VARCHAR(40),   TYPE VARCHAR(40)) "; expected "(, NOT, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table account(	login_id bigint auto_increment	userName varchar(40),	password varchar(100),   email varchar(40),   type varchar(40)) [42001-192]
+2018-11-29 16:20:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE ACCOUNT(LOGIN_ID BIGINT AUTO_INCREMENTUSERNAME[*] VARCHAR(40),PASSWORD VARCHAR(100),EMAIL VARCHAR(40),TYPE VARCHAR(40)) "; expected "(, FOR, UNSIGNED, NOT, NULL, AS, DEFAULT, GENERATED, NOT, NULL, AUTO_INCREMENT, BIGSERIAL, SERIAL, IDENTITY, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, PRIMARY, UNIQUE, NOT, NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table account(login_id bigint auto_incrementuserName varchar(40),password varchar(100),email varchar(40),type varchar(40)) [42001-192]
