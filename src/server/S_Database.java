@@ -99,12 +99,13 @@ public class S_Database implements S_IDatabase {
 
 						stmt3.setString(1, userName);
 
-						resultSet2 = stmt.executeQuery();
-
-						System.out.println(resultSet2.next());
-						if (!resultSet2.next()) {
-							accountID = resultSet2.getRow();
+						resultSet2 = stmt3.executeQuery();
+						
+						while(resultSet2.next()){
+							accountID = resultSet2.getInt(1);;
 						}
+
+						System.out.println(accountID);
 
                         if (accountID != -1) {
                             //make the character
