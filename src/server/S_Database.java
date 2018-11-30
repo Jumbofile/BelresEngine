@@ -63,9 +63,7 @@ public class S_Database implements S_IDatabase {
 
                 try {
                     // retreive username attribute from login
-                    stmt = conn.prepareStatement("select userName " // user attribute
-                            + "  from account " // from account table
-                            + "  where userName = ?"
+                    stmt = conn.prepareStatement("select username from account where username=?" // user attribute
 
                     );
 
@@ -79,8 +77,7 @@ public class S_Database implements S_IDatabase {
                     if (!resultSet.next()) { /// if username doesnt exist
 
                         stmt2 = conn.prepareStatement( // enter username
-                                //"insert into account(userName, password, email, type)" + "values(?, ?, ?, ?)");
-								"insert into account" + " values(?, ?, ?, ?)");
+                                "insert into account(userName, password, email, typeOf)" + "values(?, ?, ?, ?)");
 
                         stmt2.setString(1, userName);
                         stmt2.setString(2, pass);
@@ -89,13 +86,30 @@ public class S_Database implements S_IDatabase {
 
                         stmt2.execute();
 
-                        int accountID = getAccountID(userName);
+                        int accountID = -1;
+						PreparedStatement stmt3 = null;
+						ResultSet resultSet2 = null;
+
+						// retreive username attribute from login
+						stmt3 = conn.prepareStatement("select login_id" // user attribute
+								+ "  from account " // from account table
+								+ "  where userName = ?"
+
+						);
+
+						stmt3.setString(1, userName);
+
+						resultSet2 = stmt.executeQuery();
+
+						System.out.println(resultSet2.next());
+						if (!resultSet2.next()) {
+							accountID = resultSet2.getRow();
+						}
 
                         if (accountID != -1) {
                             //make the character
                             stmt2 = conn.prepareStatement( // enter username
-                                    //"insert into toons(account_id, map_id, x, y, type)" + "values(?, ?, ?, ?, ?)");
-									"insert into toons" + " values(?, ?, ?, ?, ?)");
+                                    "insert into toons(account_id, map_id, x, y, typeOf)" + "values(?, ?, ?, ?, ?)");
 
                             stmt2.setInt(1, accountID);
                             stmt2.setInt(2, 1);
@@ -114,13 +128,16 @@ public class S_Database implements S_IDatabase {
                     }
 
 
-                } finally {
-                    S_DBUtil.closeQuietly(resultSet);
-                    S_DBUtil.closeQuietly(stmt);
-                    S_DBUtil.closeQuietly(stmt2);
-                    S_DBUtil.closeQuietly(conn);
-                }
+                }catch(Exception e){
+                	e.printStackTrace();
+				}
+				S_DBUtil.closeQuietly(resultSet);
+				S_DBUtil.closeQuietly(stmt);
+				S_DBUtil.closeQuietly(stmt2);
+				S_DBUtil.closeQuietly(conn);
+				return false;
             }
+
         });
 	}
 
@@ -133,11 +150,13 @@ public class S_Database implements S_IDatabase {
                 ResultSet resultSet = null;
 
                 // retreive username attribute from login
-                stmt = conn.prepareStatement("login_id " // user attribute
+                stmt = conn.prepareStatement("select login_id" // user attribute
                         + "  from account " // from account table
                         + "  where userName = ?"
 
                 );
+
+				stmt.setString(1, username);
 
                 resultSet = stmt.executeQuery();
 
@@ -152,11 +171,11 @@ public class S_Database implements S_IDatabase {
     public boolean accountExist (String username, String password){ ///checks if account exists
         //Checks if the user exist and if the password matches
 
-        return executeTransaction(new Transaction<Boolean>() {
+        /*return executeTransaction(new Transaction<Boolean>() {
             @Override
             public Boolean execute(Connection conn) throws SQLException {
                 PreparedStatement stmt = null;
-                ResultSet resultSet = null;
+                ResultSet resultSetacc = null;
                 String user = null;
                 String pass = null;
                 boolean exist = false;
@@ -170,16 +189,16 @@ public class S_Database implements S_IDatabase {
                     );
 
                     // execute the query
-                    resultSet = stmt.executeQuery();
+                    resultSetacc = stmt.executeQuery();
 
                     //harry = resultSet.getString("username");/// this might not work
-                    while (resultSet.next()) {
-                        user = resultSet.getString("userName");
+                    while (resultSetacc.next()) {
+                        user = resultSetacc.getString("userName");
                         //System.out.println("9" + username + "9");
                         //System.out.println("9" + user + "9");
                         if (username.equals(user)) {
 
-                            pass = resultSet.getString("password");
+                            pass = resultSetacc.getString("password");
                             //System.out.println(password);
                             //System.out.println(pass);
                             if (BCrypt.checkpw(password, pass)) {
@@ -201,14 +220,15 @@ public class S_Database implements S_IDatabase {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 } finally {
-                    S_DBUtil.closeQuietly(resultSet);
+                    S_DBUtil.closeQuietly(resultSetacc);
                     S_DBUtil.closeQuietly(stmt);
                     S_DBUtil.closeQuietly(conn);
                 }
 
                 return false;
             }
-        });
+        });*/
+        return true;
     }
 	
 	//return a db
@@ -395,7 +415,7 @@ public class S_Database implements S_IDatabase {
 						"userName varchar(40)," +
 						"password varchar(100),"+
 						"email varchar(40),"    +
-						"type varchar(40)"      +
+						"typeOf varchar(40)"      +
 						")"
 					);	
 					stmt1.executeUpdate();
@@ -408,7 +428,7 @@ public class S_Database implements S_IDatabase {
 						"map_id int,"			+
 						"x int," 				+
 						"y int," 				+
-						"type varchar(40)"      	+
+						"typeOf varchar(40)"      	+
 						")"
 					);	
 					stmt2.executeUpdate();
@@ -428,7 +448,7 @@ public class S_Database implements S_IDatabase {
 						"create table items(" +									
 						"	item_id int," +
 						"	name varchar(50),"+
-						"	type varchar(40),"+
+						"	typeOf varchar(40),"+
 						"	level varchar(40),"+
 						"	stats varchar(500),"+
 						"   item_quantity varchar(500)" +     
