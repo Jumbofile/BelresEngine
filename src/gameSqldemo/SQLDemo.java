@@ -17,6 +17,8 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import server.S_Main;
+
 /**
  * An interactive query tool for SQLite.
  */
@@ -24,7 +26,9 @@ public class SQLDemo {
 	static class RowList extends ArrayList<List<String>> {
 		private static final long serialVersionUID = 1L;
 	}
-	
+
+	private static S_Main main = new S_Main();
+
 	private static final String PAD =
 		"                                                    " +
 		"                                                    " +
@@ -36,28 +40,48 @@ public class SQLDemo {
 		"----------------------------------------------------" +
 		"----------------------------------------------------";
 
-	public static void main(String[] args) throws ClassNotFoundException, IOException {
+	/*public static void main(String[] args) throws ClassNotFoundException, IOException {
 		Connection conn = null;
 		try {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection("jdbc:h2:./belres.db;create=true");
 			conn.setAutoCommit(true);
 	
-			queryLoop(conn);
+			//queryLoop(conn);
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
 		} finally {
 			DBUtil.closeQuietly(conn);
 		}
-}
+}*/
 
-	private static void queryLoop(Connection conn) throws IOException {
+	public static void accessDemo(String stmnt) throws ClassNotFoundException, IOException{
+		Connection conn = null;
+		if(stmnt.equals("quit")){
+			DBUtil.closeQuietly(conn);
+		}else {
+			try {
+				Class.forName("org.h2.Driver");
+				conn = DriverManager.getConnection("jdbc:h2:./belres.db;create=true");
+				conn.setAutoCommit(true);
+
+				queryLoop(conn, stmnt);
+				//queryLoop(conn);
+			} catch (SQLException e) {
+				System.out.println("Error: " + e.getMessage());
+			} finally {
+				DBUtil.closeQuietly(conn);
+			}
+		}
+
+	}
+	private static void queryLoop(Connection conn, String sqlstate) throws IOException {
 		StatementReader stmtReader = new StatementReader(new InputStreamReader(System.in));
 
 		boolean done = false;
-		while (!done) {
-			System.out.print("SQL> ");
-			String sql = stmtReader.nextStatement(); // keyboard.nextLine();
+		//while (!done) {
+		//main.consoleWin.append("SQL> ");
+			String sql = sqlstate;
 
 			if (sql == null) {
 				done = true;
@@ -77,9 +101,9 @@ public class SQLDemo {
 					try {
 						importCSV(conn, tableName, csvFile);
 					} catch (IOException e) {
-						System.out.println("Error: " + e.getMessage());
+						main.consoleWin.append("Error: " + e.getMessage() + "\n");
 					} catch (SQLException e) {
-						System.out.println("Error: " + e.getMessage());
+						main.consoleWin.append("Error: " + e.getMessage() + "\n");
 					}
 				} else {
 					try {
@@ -87,11 +111,12 @@ public class SQLDemo {
 //						System.out.println(sql);
 						executeSQL(conn, sql);
 					} catch (SQLException e) {
-						System.out.println("Error: " + e.getMessage());
+						main.consoleWin.append("Error: " + e.getMessage() + "\n");
 					}
 				}
 			}
-		}
+		done = true;
+		//}//
 	}
 
 	private static void executeSQL(Connection conn, String sql) throws SQLException {
@@ -122,7 +147,7 @@ public class SQLDemo {
 					printRow(row, colWidths);
 				}
 			}
-			System.out.println("OK (" + rowCount + " rows(s))");
+			main.consoleWin.append("OK (" + rowCount + " rows(s)) \n");
 		} finally {
 			DBUtil.closeQuietly(resultSet);
 			DBUtil.closeQuietly(stmt);
@@ -132,13 +157,13 @@ public class SQLDemo {
 	private static void printRow(List<String> row, List<Integer> colWidths) {
 		for (int i = 0; i < row.size(); i++) {
 			if (i > 0) {
-				System.out.print(" ");
+				main.consoleWin.append(" ");
 			}
 			String item = row.get(i);
-			System.out.print(PAD.substring(0, colWidths.get(i) - item.length()));
-			System.out.print(item);
+			main.consoleWin.append(PAD.substring(0, colWidths.get(i) - item.length()));
+			main.consoleWin.append(item);
 		}
-		System.out.println();
+		main.consoleWin.append("\n");
 	}
 
 	private static void printSeparator(List<Integer> colWidths) {
@@ -224,7 +249,7 @@ public class SQLDemo {
 // DJH2: and then substituted into the 'insert' statement
 // DJH2-3-12-17: Added 'published' as an attribute of books table
 // DJH2-3-12-17: changed attributes to 'lastname' and 'firstname' for authors table
-				System.out.println("Importing data for table: <" + tableName + ">");
+				main.consoleWin.append("Importing data for table: <" + tableName + "> \n");
 				if (tableName.toLowerCase().equals("books"))
 				{
 					buf.append("insert into " + tableName + " (author_id, title, isbn, published) values (");
@@ -263,7 +288,7 @@ public class SQLDemo {
 		conn.setAutoCommit(false);
 		stmt.executeBatch();
 		conn.setAutoCommit(true);
-		
-		System.out.println("Successful import");
+
+		main.consoleWin.append("Successful import \n");
 	}
 }

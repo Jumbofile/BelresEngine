@@ -79,7 +79,8 @@ public class S_Database implements S_IDatabase {
                     if (!resultSet.next()) { /// if username doesnt exist
 
                         stmt2 = conn.prepareStatement( // enter username
-                                "insert into account(userName, password, email, type)" + "values(?, ?, ?, ?)");
+                                //"insert into account(userName, password, email, type)" + "values(?, ?, ?, ?)");
+								"insert into account" + " values(?, ?, ?, ?)");
 
                         stmt2.setString(1, userName);
                         stmt2.setString(2, pass);
@@ -93,7 +94,8 @@ public class S_Database implements S_IDatabase {
                         if (accountID != -1) {
                             //make the character
                             stmt2 = conn.prepareStatement( // enter username
-                                    "insert into toons(account_id, map_id, x, y, type)" + "values(?, ?, ?, ?, ?)");
+                                    //"insert into toons(account_id, map_id, x, y, type)" + "values(?, ?, ?, ?, ?)");
+									"insert into toons" + " values(?, ?, ?, ?, ?)");
 
                             stmt2.setInt(1, accountID);
                             stmt2.setInt(2, 1);
@@ -323,7 +325,9 @@ public class S_Database implements S_IDatabase {
 		}
 		return colWidths;
 	}
-	
+
+
+
 	public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
 		Connection conn = connect();
 		
@@ -370,90 +374,7 @@ public class S_Database implements S_IDatabase {
 	}
 	
 	public void loadInitialData() { ///taken from lab06
-		/*executeTransaction(new Transaction<Boolean>() {
-			@Override
-			public Boolean execute(Connection conn) throws SQLException {
-				List<Item> houseItems;
-				List<Area> areaList;
-				List<LinearArea> linearAreaList;
-				List<Health> healthList;
-				
-				try {
-					houseItems = InitialData.getHouseItems();
-					areaList = InitialData.getArea();
-					linearAreaList = InitialData.getLinearArea();
-					healthList = InitialData.getHealth();
-				} catch (IOException e) {
-					throw new SQLException("Couldn't read initial data", e);
-				}
 
-				PreparedStatement insertHouseItem = null;
-				PreparedStatement insertArea = null;
-				PreparedStatement insertLinearArea = null;
-				PreparedStatement insertHealth = null;
-
-				
-				try {
-					// populate houseItems table 
-					insertHouseItem = conn.prepareStatement("insert into houseItems (itemName, itemType, size) values (?, ?, ?)");
-					for (Item item : houseItems) {
-//						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
-						insertHouseItem.setString(1, item.getName());
-						insertHouseItem.setString(2, item.getItemType());
-						insertHouseItem.setInt(3, item.getSize());
-						insertHouseItem.addBatch();
-					}
-					insertHouseItem.executeBatch();
-					
-					insertArea = conn.prepareStatement("insert into area(areaName, para, Opt1, Opt2, Opt3, Opt4, Opt5, Opt6, areaLink1, areaLink2, areaLink3, areaLink4, areaLink5, areaLink6, areaPicture) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-					for (Area area : areaList) {
-						insertArea.setString(1, area.getName());
-						insertArea.setString(2, area.getPara());
-						insertArea.setString(3, area.getOpt1());
-						insertArea.setString(4, area.getOpt2());
-						insertArea.setString(5, area.getOpt3());
-						insertArea.setString(6, area.getOpt4());
-						insertArea.setString(7, area.getOpt5());
-						insertArea.setString(8, area.getOpt6());
-						insertArea.setString(9, area.getLnk1());
-						insertArea.setString(10, area.getLnk2());
-						insertArea.setString(11, area.getLnk3());
-						insertArea.setString(12, area.getLnk4());
-						insertArea.setString(13, area.getLnk5());
-						insertArea.setString(14, area.getLnk6());
-						insertArea.setString(15, area.getPicture());
-						insertArea.addBatch();
-						
-					}
-					
-					insertArea.executeBatch();
-					
-					insertLinearArea = conn.prepareStatement("insert into linearArea (areaName, para) values (?, ?)");
-					for (LinearArea linearArea : linearAreaList) {
-						insertLinearArea.setString(1, linearArea.getName());
-						insertLinearArea.setString(2, linearArea.getPara());
-						insertLinearArea.addBatch();
-					}
-					
-					insertLinearArea.executeBatch();
-					
-					insertHealth = conn.prepareStatement("insert into health (health) values (?)");
-					for (Health health : healthList) {
-						insertHealth.setString(1, health.getHealth());
-						insertHealth.addBatch();
-					}
-					
-					insertHealth.executeBatch();
-					
-					return true;
-				} finally {
-					DBUtil.closeQuietly(insertHouseItem);
-					DBUtil.closeQuietly(insertArea);
-					DBUtil.closeQuietly(insertLinearArea);
-					DBUtil.closeQuietly(insertHealth);
-				}
-			}
-		});*/
 	}
 	
 	
@@ -525,11 +446,7 @@ public class S_Database implements S_IDatabase {
 			}
 		});
 	}
-	
 
-	
-	
-	
 	// The main method creates the database tables and loads the initial data.
 	public static void main(String[] args) throws IOException {
 		System.out.println("Creating tables...");

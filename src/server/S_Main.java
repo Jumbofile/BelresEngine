@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import org.mindrot.jbcrypt.BCrypt;
-
+import gameSqldemo.SQLDemo;
 
 public class S_Main {
 	
@@ -97,7 +97,16 @@ public class S_Main {
                 
                 //sql commands: /sql getdb:dbname
                 if(consoleBox.getText().toLowerCase().startsWith("/sql")) {
-                	try {
+                	//while(!consoleBox.getText().equals("quit")){
+                		//SQLDemo demo = new SQLDemo();
+					String statement = consoleBox.getText().substring(consoleBox.getText().indexOf(' '));
+						try {
+							gameSqldemo.SQLDemo.accessDemo(statement);
+						}catch(Exception e1){
+							consoleWin.append("Invalid statement \n");
+						}
+					//}
+                	/*try {
                 		String command = consoleBox.getText().substring(
                 				consoleBox.getText().toLowerCase().indexOf(' ') + 1, consoleBox.getText().indexOf(':'));
                 		if(command.equals("getdb")) {
@@ -111,7 +120,7 @@ public class S_Main {
                 	}catch(Exception x){
                 		consoleWin.append(x.toString() + "\n");
                 		consoleWin.append("INVALID STATEMENT: use format; /sql COMMAND:dbname\n");
-                	}   	
+                	}   	*/
                 }
                 consoleBox.setText("");
                 
