@@ -100,7 +100,7 @@ public class S_Database implements S_IDatabase {
 						stmt3.setString(1, userName);
 
 						resultSet2 = stmt3.executeQuery();
-						
+
 						while(resultSet2.next()){
 							accountID = resultSet2.getInt(1);;
 						}

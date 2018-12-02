@@ -128,3 +128,6 @@ org.h2.jdbc.JdbcSQLException: The object is already closed [90007-192]
 org.h2.jdbc.JdbcSQLException: Data conversion error converting "r" [22018-192]
 2018-11-30 02:04:39 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: The object is already closed [90007-192]
+2018-11-30 17:13:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ACCOUNTS" not found; SQL statement:
+select * from accounts [42102-192]
