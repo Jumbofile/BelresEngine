@@ -1,4 +1,4 @@
-package client;
+package com.belres.game;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;

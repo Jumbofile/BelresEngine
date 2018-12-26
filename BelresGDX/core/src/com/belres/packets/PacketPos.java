@@ -1,4 +1,4 @@
-package packets;
+package com.belres.packets;
 
 /**
  * Created by gplac on 10/8/2018.

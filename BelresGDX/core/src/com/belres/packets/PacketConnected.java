@@ -1,4 +1,4 @@
-package packets;
+package com.belres.packets;
 
 public class PacketConnected extends Packet{
 	public boolean status;

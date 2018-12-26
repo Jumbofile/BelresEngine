@@ -1,5 +1,7 @@
 apply plugin: "java"
 
+compile "kryonet:kryonet:2.21"
+
 sourceCompatibility = 1.6
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 

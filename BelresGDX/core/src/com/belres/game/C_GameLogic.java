@@ -1,4 +1,4 @@
-package client;
+package com.belres.game;
 
 public class C_GameLogic {
 

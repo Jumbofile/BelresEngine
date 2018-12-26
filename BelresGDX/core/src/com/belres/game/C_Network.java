@@ -1,14 +1,14 @@
-package client;
+package com.belres.game;
 
 import java.io.*;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import packets.Packet;
-import packets.PacketChat;
-import packets.PacketConnected;
-import packets.PacketDisconnect;
-import packets.PacketLogin;
+import com.belres.packets.Packet;
+import com.belres.packets.PacketChat;
+import com.belres.packets.PacketConnected;
+import com.belres.packets.PacketDisconnect;
+import com.belres.packets.PacketLogin;
 
 public class C_Network {
 	private boolean connected = false;
