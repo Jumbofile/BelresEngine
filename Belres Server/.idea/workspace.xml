@@ -2,52 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07407816-4f54-45a4-9366-bc5194cbdbf5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresEngine.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/back.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/back2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/bdown.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/bhover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/bup.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/fire.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/fire.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/fire2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/login.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/graphics/menu/snow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../data/sprites/chars/default.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/client/C_GameLogic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/client/C_Graphics.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/client/C_Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/client/C_Network.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/client/C_Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/client/C_Vars.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/client/C_WindowGame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/client/C_WindowMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/gameSqldemo/DBUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/gameSqldemo/SQLDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/gameSqldemo/StatementReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/org/mindrot/jbcrypt/BCrypt.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/packets/Packet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/packets/PacketChat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/packets/PacketConnected.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/packets/PacketDisconnect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/packets/PacketLogin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/packets/PacketPos.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/server/S_DBUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/server/S_Database.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/server/S_GameLogic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/server/S_IDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/server/S_Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/server/S_Network.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/server/S_PersistenceException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/server/S_Vars.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/C_GameLogic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/C_Graphics.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/C_Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/C_Network.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/C_Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/C_Vars.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/C_WindowGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/C_WindowMenu.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,7 +24,7 @@
         <entry file="file://$PROJECT_DIR$/src/server/S_Database.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="312">
-              <caret line="288" column="17" lean-forward="true" selection-start-line="288" selection-start-column="17" selection-end-line="288" selection-end-column="17" />
+              <caret line="288" column="17" selection-start-line="288" selection-start-column="17" selection-end-line="288" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -102,7 +64,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545855684224" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545856328613" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -126,7 +88,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.S_Database">
+  <component name="RunManager" selected="Application.S_Main">
     <configuration name="S_Database" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.S_Database" />
       <module name="BelresEngine" />
@@ -155,8 +117,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.S_Database" />
         <item itemvalue="Application.S_Main" />
+        <item itemvalue="Application.S_Database" />
       </list>
     </recent_temporary>
   </component>
@@ -172,12 +134,12 @@
       <updated>1545834777496</updated>
       <workItem from="1545834785387" duration="3103000" />
       <workItem from="1545841869977" duration="2618000" />
-      <workItem from="1545855627348" duration="43000" />
+      <workItem from="1545855627348" duration="506000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5764000" />
+    <option name="totallyTimeSpent" value="6227000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1616" height="876" extended-state="6" />
@@ -220,7 +182,7 @@
     <entry file="file://$PROJECT_DIR$/src/server/S_Database.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
-          <caret line="288" column="17" lean-forward="true" selection-start-line="288" selection-start-column="17" selection-end-line="288" selection-end-column="17" />
+          <caret line="288" column="17" selection-start-line="288" selection-start-column="17" selection-end-line="288" selection-end-column="17" />
         </state>
       </provider>
     </entry>
