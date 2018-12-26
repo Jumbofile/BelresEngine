@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="commons-io-2.6-tests">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6-tests.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ibxm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jinput.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/kryonet-2.21-all.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lwjgl_util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slick.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/TWL.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/TWLEffects.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6-test-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

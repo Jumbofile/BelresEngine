@@ -125,5 +125,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="h2-1.4.197" level="project" />
+    <orderEntry type="library" name="commons-io-2.6-tests" level="project" />
   </component>
 </module>

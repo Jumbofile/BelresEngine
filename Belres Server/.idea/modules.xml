@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/BelresEngine.iml" filepath="$PROJECT_DIR$/.idea/BelresEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BelresEngine.iml" filepath="$PROJECT_DIR$/BelresEngine.iml" />
     </modules>
   </component>
 </project>
