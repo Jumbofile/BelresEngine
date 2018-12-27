@@ -18,18 +18,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Eclipse IDE - https://www.eclipse.org/
+libGDX      - https://libgdx.badlogicgames.com/
 
-Slick2d     - http://slick.ninjacave.com/
-
-JDK         - https://www.oracle.com/technetwork/java/javase/downloads/index.html
+JDK (v8.1)  - https://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 Kryonet     - https://github.com/EsotericSoftware/kryonet/releases
 
-Apche Derby - https://db.apache.org/derby/
+H2 Embedded - http://www.h2database.com/html/main.html
 
 ### Installing
 
+OUTDATED:
 Download and install JDK
 
 Download and install Eclipse
@@ -65,9 +64,9 @@ Compile jars and distrubute
 
 ## Built With
 
-* [Slick2d](http://slick.ninjacave.com/) - The graphics framework used
+* [libGDX](https://libgdx.badlogicgames.com/) - The graphics framework used
 
-* [Apache Derby](https://db.apache.org/derby/) - SQL databse used
+* [H2](http://www.h2database.com/html/main.html) - SQL databse used
 
 ## Versioning
 
@@ -75,7 +74,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Gregory Plachno** - *Everything* - [Jumbofile](https://github.com/Jumbofile)
+* **Gregory Plachno** - *Creator* - [Jumbofile](https://github.com/Jumbofile)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
