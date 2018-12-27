@@ -1,6 +1,6 @@
 package server;
 
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import javax.swing.AbstractAction;
@@ -27,16 +27,18 @@ public class S_Main {
 		JFrame frame = new JFrame("Belres Server");
 		JTextField consoleBox = new JTextField();
 		JPanel panel = new JPanel();
+		//panel.setBackground(Color.GRAY);
 		JScrollPane scroll = new JScrollPane (consoleWin);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(800, 495);
+		frame.setSize(810, 505);
 		frame.setResizable(false);
+		//consoleWin.setBackground(Color.DARK_GRAY);
 		consoleWin.setEditable(false);
 		consoleWin.setFont(new Font("Consolas", Font.PLAIN, 12));  // make a new font object);
 		scroll.setBounds(10,10,775,420);
 		consoleWin.setLineWrap(true);
 		
-		//consoleBox.setBackground(Color.blue);
+		//consoleBox.setBackground(Color.BLUE);
 		consoleBox.setBounds(10,432,775,24);
 		frame.getContentPane().add(scroll);
 		

@@ -1,7 +1,5 @@
 apply plugin: "java"
 
-compile "kryonet:kryonet:2.21"
-
 sourceCompatibility = 1.6
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
@@ -10,4 +8,8 @@ sourceSets.main.java.srcDirs = [ "src/" ]
 
 eclipse.project {
     name = appName + "-core"
+}
+dependencies {
+    compile group: 'com.esotericsoftware', name: 'kryonet', version: '2.22.0-RC1'
+    // https://mvnrepository.com/artifact/kryonet/kryonet-all
 }
