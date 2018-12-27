@@ -30,7 +30,7 @@ public class S_Main {
 		//panel.setBackground(Color.GRAY);
 		JScrollPane scroll = new JScrollPane (consoleWin);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(810, 505);
+		frame.setSize(800, 495);
 		frame.setResizable(false);
 		//consoleWin.setBackground(Color.DARK_GRAY);
 		consoleWin.setEditable(false);

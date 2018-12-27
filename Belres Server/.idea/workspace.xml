@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07407816-4f54-45a4-9366-bc5194cbdbf5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/META-INF/BelresEngine.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/S_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/S_Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/.gradle/5.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/.gradle/5.0/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/.gradle/5.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/.gradle/5.0/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/BelresGDX.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/BelresGDX.ipr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/core/BelresGDX.core.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/core/BelresGDX.core.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/core/BelresGDX.core.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/core/BelresGDX.core.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/core/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/desktop/BelresGDX.desktop.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/desktop/BelresGDX.desktop.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/desktop/BelresGDX.desktop.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/desktop/BelresGDX.desktop.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BelresGDX/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../BelresGDX/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/server/S_Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="34" column="10" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
+            <state relative-caret-position="255">
+              <caret line="77" column="41" lean-forward="true" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -97,7 +88,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545937688117" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545945885111" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -169,12 +160,12 @@
       <workItem from="1545841869977" duration="2618000" />
       <workItem from="1545855627348" duration="506000" />
       <workItem from="1545856184802" duration="824000" />
-      <workItem from="1545937392758" duration="291000" />
+      <workItem from="1545937392758" duration="1724000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7342000" />
+    <option name="totallyTimeSpent" value="8775000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1616" height="876" extended-state="6" />
@@ -189,7 +180,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32974428" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49871466" weight="0.32974428" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -198,8 +189,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32974428" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32974428" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5012854" side_tool="true" visible="true" weight="0.32974428" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49807197" weight="0.32974428" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -214,6 +205,11 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/server/S_Database.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -224,8 +220,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/server/S_Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="34" column="10" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
+        <state relative-caret-position="255">
+          <caret line="77" column="41" lean-forward="true" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
         </state>
       </provider>
     </entry>
